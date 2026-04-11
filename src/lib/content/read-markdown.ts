@@ -11,12 +11,18 @@ export function readMarkdown<TFrontmatter>(
   relativePath: string,
 ): ParsedMarkdown<TFrontmatter> {
   const filePath = path.join(/* turbopackIgnore: true */ process.cwd(), relativePath);
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const parsed = matter(fileContent);
-  return {
-    frontmatter: parsed.data as TFrontmatter,
-    body: parsed.content,
-  };
+  try {
+    const fileContent = fs.readFileSync(filePath, "utf-8");
+    const parsed = matter(fileContent);
+    return {
+      frontmatter: parsed.data as TFrontmatter,
+      body: parsed.content,
+    };
+  } catch (err) {
+    throw new Error(
+      `Failed to read "${relativePath}": ${err instanceof Error ? err.message : String(err)}`,
+    );
+  }
 }
 
 export function listMarkdownSlugs(relativeDir: string): string[] {

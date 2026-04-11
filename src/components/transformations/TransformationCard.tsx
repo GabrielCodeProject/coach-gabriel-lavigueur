@@ -16,6 +16,7 @@ export function TransformationCard({ transformation }: TransformationCardProps) 
     <Link
       href={ROUTES.TRANSFORMATION_DETAIL(transformation.slug)}
       className="group"
+      aria-label={`Voir la transformation de ${transformation.client_name} — ${transformation.duration_months} mois`}
     >
       <Card className="h-full overflow-hidden border-border/70 transition-all group-hover:border-primary/40 group-hover:shadow-md">
         <div className="grid grid-cols-2">

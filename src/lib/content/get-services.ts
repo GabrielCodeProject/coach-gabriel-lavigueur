@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { listMarkdownSlugs, readMarkdown } from "./read-markdown";
 import type {
   Service,
@@ -7,7 +8,7 @@ import type {
 
 const SERVICES_DIR = "content/services";
 
-export function getServices(): Service[] {
+export const getServices = cache((): Service[] => {
   const slugs = listMarkdownSlugs(SERVICES_DIR);
   const services = slugs.map((slug) => {
     const { frontmatter } = readMarkdown<ServiceFrontmatter>(
@@ -16,7 +17,7 @@ export function getServices(): Service[] {
     return { ...frontmatter, slug };
   });
   return services.sort((a, b) => a.sort_order - b.sort_order);
-}
+});
 
 export function getServiceById(id: ServiceId): Service | null {
   return getServices().find((service) => service.id === id) ?? null;

@@ -104,6 +104,7 @@ export function QuestionnaireForm() {
           <form.Field name="nom">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Nom et prénom"
                 required
                 error={getFieldError(field)}
@@ -124,6 +125,7 @@ export function QuestionnaireForm() {
           <form.Field name="email">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Courriel"
                 required
                 error={getFieldError(field)}
@@ -144,7 +146,7 @@ export function QuestionnaireForm() {
 
           <form.Field name="telephone">
             {(field) => (
-              <FieldWrapper label="Téléphone (facultatif)" error={getFieldError(field)}>
+              <FieldWrapper id={field.name} label="Téléphone (facultatif)" error={getFieldError(field)}>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -160,7 +162,7 @@ export function QuestionnaireForm() {
 
           <form.Field name="age">
             {(field) => (
-              <FieldWrapper label="Âge" required error={getFieldError(field)}>
+              <FieldWrapper id={field.name} label="Âge" required error={getFieldError(field)}>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -187,7 +189,7 @@ export function QuestionnaireForm() {
         <CardContent className="grid gap-4 md:grid-cols-3">
           <form.Field name="taille_cm">
             {(field) => (
-              <FieldWrapper label="Taille (cm)" required error={getFieldError(field)}>
+              <FieldWrapper id={field.name} label="Taille (cm)" required error={getFieldError(field)}>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -206,7 +208,7 @@ export function QuestionnaireForm() {
 
           <form.Field name="poids_kg">
             {(field) => (
-              <FieldWrapper label="Poids (kg)" required error={getFieldError(field)}>
+              <FieldWrapper id={field.name} label="Poids (kg)" required error={getFieldError(field)}>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -227,6 +229,7 @@ export function QuestionnaireForm() {
           <form.Field name="niveau_activite">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Niveau d'activité"
                 required
                 error={getFieldError(field)}
@@ -253,6 +256,7 @@ export function QuestionnaireForm() {
           <form.Field name="historique_entrainement">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Historique d'entraînement (facultatif)"
                 error={getFieldError(field)}
                 className="md:col-span-3"
@@ -281,6 +285,7 @@ export function QuestionnaireForm() {
           <form.Field name="objectif_principal">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Objectif principal"
                 required
                 error={getFieldError(field)}
@@ -307,6 +312,7 @@ export function QuestionnaireForm() {
           <form.Field name="echeance_mois">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Échéance (mois)"
                 required
                 error={getFieldError(field)}
@@ -338,6 +344,7 @@ export function QuestionnaireForm() {
           <form.Field name="blessures">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Blessures ou limitations physiques (facultatif)"
                 error={getFieldError(field)}
               >
@@ -356,6 +363,7 @@ export function QuestionnaireForm() {
           <form.Field name="conditions_medicales">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Conditions médicales (facultatif)"
                 error={getFieldError(field)}
               >
@@ -374,6 +382,7 @@ export function QuestionnaireForm() {
           <form.Field name="restrictions_alimentaires">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Restrictions alimentaires (facultatif)"
                 error={getFieldError(field)}
               >
@@ -401,6 +410,7 @@ export function QuestionnaireForm() {
           <form.Field name="seances_par_semaine">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Séances souhaitées par semaine"
                 required
                 error={getFieldError(field)}
@@ -424,6 +434,7 @@ export function QuestionnaireForm() {
           <form.Field name="budget_fourchette">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Fourchette budgétaire"
                 required
                 error={getFieldError(field)}
@@ -450,6 +461,7 @@ export function QuestionnaireForm() {
           <form.Field name="source">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Comment tu m'as trouvé"
                 required
                 error={getFieldError(field)}
@@ -477,6 +489,7 @@ export function QuestionnaireForm() {
           <form.Field name="pourquoi_maintenant">
             {(field) => (
               <FieldWrapper
+                id={field.name}
                 label="Pourquoi maintenant ?"
                 required
                 error={getFieldError(field)}
@@ -561,6 +574,7 @@ export function QuestionnaireForm() {
 }
 
 type FieldWrapperProps = {
+  id: string;
   label: string;
   required?: boolean;
   error?: string | undefined;
@@ -570,6 +584,7 @@ type FieldWrapperProps = {
 };
 
 function FieldWrapper({
+  id,
   label,
   required,
   error,
@@ -579,7 +594,7 @@ function FieldWrapper({
 }: FieldWrapperProps) {
   return (
     <div className={cn("flex flex-col gap-2", className)}>
-      <Label>
+      <Label htmlFor={id}>
         <span>
           {label}
           {required ? (
@@ -591,7 +606,11 @@ function FieldWrapper({
       </Label>
       {children}
       {helper ? <p className="text-xs text-muted-foreground">{helper}</p> : null}
-      {error ? <p className="text-xs text-destructive">{error}</p> : null}
+      {error ? (
+        <p id={`${id}-error`} className="text-xs text-destructive" role="alert">
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }

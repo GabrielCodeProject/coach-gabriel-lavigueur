@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
@@ -15,21 +15,46 @@ type MobileNavToggleProps = {
 
 export function MobileNavToggle({ items, contactHref }: MobileNavToggleProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
+  const handleClose = () => {
+    setIsOpen(false);
+    triggerRef.current?.focus();
+  };
+
+  // Lock body scroll and move focus into the dialog when open
   useEffect(() => {
     if (!isOpen) return;
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
     return () => {
       document.body.style.overflow = originalOverflow;
     };
   }, [isOpen]);
 
-  const handleClose = () => setIsOpen(false);
+  // Escape key closes the dialog
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Restore scroll if the component unmounts while open
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   return (
     <>
       <Button
+        ref={triggerRef}
         type="button"
         variant="ghost"
         size="icon"
@@ -47,12 +72,17 @@ export function MobileNavToggle({ items, contactHref }: MobileNavToggleProps) {
               className="fixed inset-0 z-50 flex flex-col bg-background md:hidden"
               role="dialog"
               aria-modal="true"
+              aria-labelledby="mobile-nav-title"
             >
               <div className="flex h-16 items-center justify-between border-b border-border px-4">
-                <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+                <span
+                  id="mobile-nav-title"
+                  className="text-sm font-semibold uppercase tracking-widest text-muted-foreground"
+                >
                   Menu
                 </span>
                 <Button
+                  ref={closeButtonRef}
                   type="button"
                   variant="ghost"
                   size="icon"

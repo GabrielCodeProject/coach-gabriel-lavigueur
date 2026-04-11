@@ -16,7 +16,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
   return (
     <Accordion className="mx-auto w-full max-w-3xl">
       {items.map((item, index) => (
-        <AccordionItem key={item.question} value={index}>
+        <AccordionItem key={item.question} value={String(index)}>
           <AccordionTrigger className="py-4 text-base">
             {item.question}
           </AccordionTrigger>

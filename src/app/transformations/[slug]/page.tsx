@@ -4,7 +4,6 @@ import {
   getTransformationSlugs,
   getTransformations,
 } from "@/lib/content/get-transformations";
-import { getTransformationBySlug } from "@/lib/content/get-transformation-by-slug";
 import { buildMetadata } from "@/lib/seo/build-metadata";
 import { ROUTES } from "@/lib/routes";
 import { Badge } from "@/components/ui/badge";
@@ -23,7 +22,7 @@ export async function generateMetadata(
   props: PageProps<"/transformations/[slug]">,
 ): Promise<Metadata> {
   const { slug } = await props.params;
-  const transformation = getTransformationBySlug(slug);
+  const transformation = getTransformations().find((t) => t.slug === slug) ?? null;
   if (!transformation) {
     return buildMetadata({
       pageTitle: "Transformation introuvable",
@@ -42,12 +41,13 @@ export default async function TransformationDetailPage(
   props: PageProps<"/transformations/[slug]">,
 ) {
   const { slug } = await props.params;
-  const transformation = getTransformationBySlug(slug);
+  const allTransformations = getTransformations();
+  const transformation = allTransformations.find((t) => t.slug === slug) ?? null;
   if (!transformation) {
     notFound();
   }
 
-  const otherTransformations = getTransformations()
+  const otherTransformations = allTransformations
     .filter((item) => item.slug !== slug)
     .slice(0, 2);
 
