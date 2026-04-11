@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -40,52 +41,55 @@ export function MobileNavToggle({ items, contactHref }: MobileNavToggleProps) {
         <Menu className="size-5" />
       </Button>
 
-      {isOpen ? (
-        <div
-          className="fixed inset-0 z-50 flex flex-col bg-background md:hidden"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="flex h-16 items-center justify-between border-b border-border px-4">
-            <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-              Menu
-            </span>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={handleClose}
-              aria-label="Fermer le menu"
+      {isOpen
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-50 flex flex-col bg-background md:hidden"
+              role="dialog"
+              aria-modal="true"
             >
-              <X className="size-5" />
-            </Button>
-          </div>
-          <nav className="flex flex-1 flex-col gap-1 p-4">
-            {items.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={handleClose}
-                className="rounded-md px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="mt-auto pt-6">
-              <Link
-                href={contactHref}
-                onClick={handleClose}
-                className={cn(
-                  buttonVariants({ variant: "default" }),
-                  "h-12 w-full px-6 text-base",
-                )}
-              >
-                Remplir mon questionnaire
-              </Link>
-            </div>
-          </nav>
-        </div>
-      ) : null}
+              <div className="flex h-16 items-center justify-between border-b border-border px-4">
+                <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+                  Menu
+                </span>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleClose}
+                  aria-label="Fermer le menu"
+                >
+                  <X className="size-5" />
+                </Button>
+              </div>
+              <nav className="flex flex-1 flex-col gap-1 p-4">
+                {items.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={handleClose}
+                    className="rounded-md px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <div className="mt-auto pt-6">
+                  <Link
+                    href={contactHref}
+                    onClick={handleClose}
+                    className={cn(
+                      buttonVariants({ variant: "default" }),
+                      "h-12 w-full px-6 text-base",
+                    )}
+                  >
+                    Remplir mon questionnaire
+                  </Link>
+                </div>
+              </nav>
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }
