@@ -29,7 +29,10 @@ export default function FaqPage() {
           <FaqAccordion items={frontmatter.items} />
         </div>
       </section>
-      <CtaQuestionnaireBanner />
+      <CtaQuestionnaireBanner
+        title="Tu as encore des questions ?"
+        body="Je te réponds personnellement — pas un bot, pas un template."
+      />
     </>
   );
 }

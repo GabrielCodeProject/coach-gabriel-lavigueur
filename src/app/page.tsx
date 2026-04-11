@@ -5,7 +5,9 @@ import { buildMetadata } from "@/lib/seo/build-metadata";
 import { ROUTES } from "@/lib/routes";
 import { HeroSection } from "@/components/home/HeroSection";
 import { FitlogHighlightSection } from "@/components/home/FitlogHighlightSection";
+import { ServiceTeaser } from "@/components/home/ServiceTeaser";
 import { MethodPreviewSection } from "@/components/home/MethodPreviewSection";
+import { PhilosophyQuote } from "@/components/home/PhilosophyQuote";
 import { TransformationsPreviewSection } from "@/components/home/TransformationsPreviewSection";
 import { CtaQuestionnaireBanner } from "@/components/home/CtaQuestionnaireBanner";
 import type { HomePageFrontmatter } from "@/types/page.types";
@@ -30,13 +32,13 @@ export default function HomePage() {
         eyebrow={frontmatter.hero_eyebrow}
         title={frontmatter.hero_title}
         subtitle={frontmatter.hero_subtitle}
+        bodyText={frontmatter.hero_body_text}
         ctaLabel={frontmatter.hero_cta_label}
       />
-      <FitlogHighlightSection
-        title={frontmatter.fitlog_highlight_title}
-        body={frontmatter.fitlog_highlight_body}
-      />
+      <FitlogHighlightSection />
+      <ServiceTeaser />
       <MethodPreviewSection />
+      <PhilosophyQuote />
       <TransformationsPreviewSection
         transformations={featuredTransformations}
       />

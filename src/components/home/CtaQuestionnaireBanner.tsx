@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/routes";
+import { BUSINESS } from "@/lib/business-data";
 
 type CtaQuestionnaireBannerProps = {
   title?: string;
@@ -11,9 +12,9 @@ type CtaQuestionnaireBannerProps = {
 };
 
 export function CtaQuestionnaireBanner({
-  title = "Prêt à commencer ?",
-  body = "Remplis le questionnaire. Je te reviens personnellement sous 48 heures pour fixer ta consultation au Nutrition Suprême.",
-  ctaLabel = "Remplir mon questionnaire",
+  title = "Ton point de départ existe déjà",
+  body = "Tu n'as pas besoin d'être prêt — juste honnête sur où tu en es.",
+  ctaLabel = BUSINESS.cta.primary,
 }: CtaQuestionnaireBannerProps) {
   return (
     <section className="bg-background">

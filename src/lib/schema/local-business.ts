@@ -34,5 +34,11 @@ export function buildLocalBusinessSchema() {
       geoRadius: `${BUSINESS.serviceArea.radiusKm * 1000}`,
     },
     additionalType: BUSINESS.schemaType.additionalTypes,
+    openingHoursSpecification: BUSINESS.businessHours.schedule.map((slot) => ({
+      "@type": "OpeningHoursSpecification" as const,
+      dayOfWeek: [...slot.days],
+      opens: slot.opens,
+      closes: slot.closes,
+    })),
   };
 }

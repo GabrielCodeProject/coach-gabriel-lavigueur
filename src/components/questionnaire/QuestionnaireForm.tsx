@@ -28,6 +28,8 @@ import {
   OBJECTIF_PRINCIPAL_LABEL,
   BUDGET_FOURCHETTE_LABEL,
   SOURCE_PROSPECT_LABEL,
+  PLAGE_HORAIRE_LABEL,
+  JOUR_SEMAINE_LABEL,
 } from "@/types/questionnaire.types";
 
 const NATIVE_SELECT_CLASS =
@@ -485,6 +487,83 @@ export function QuestionnaireForm() {
               </FieldWrapper>
             )}
           </form.Field>
+
+          {/* Disponibilités horaires — facultatif */}
+          <div className="grid grid-cols-2 gap-4 md:col-span-2">
+            <form.Field name="plages_horaires">
+              {(field) => (
+                <div className="flex flex-col gap-3">
+                  <Label className="text-sm font-medium">
+                    Plage horaire préférée{" "}
+                    <span className="text-xs font-normal text-muted-foreground">
+                      (facultatif)
+                    </span>
+                  </Label>
+                  <div className="flex flex-col gap-2">
+                    {Object.entries(PLAGE_HORAIRE_LABEL).map(([value, label]) => (
+                      <div key={value} className="flex items-center gap-2">
+                        <Checkbox
+                          id={`plage-${value}`}
+                          checked={(field.state.value ?? []).includes(value)}
+                          onCheckedChange={(checked) => {
+                            const current = field.state.value ?? [];
+                            field.handleChange(
+                              checked === true
+                                ? [...current, value]
+                                : current.filter((v) => v !== value),
+                            );
+                          }}
+                        />
+                        <Label
+                          htmlFor={`plage-${value}`}
+                          className="text-sm font-normal"
+                        >
+                          {label}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </form.Field>
+
+            <form.Field name="jours_disponibles">
+              {(field) => (
+                <div className="flex flex-col gap-3">
+                  <Label className="text-sm font-medium">
+                    Jours disponibles{" "}
+                    <span className="text-xs font-normal text-muted-foreground">
+                      (facultatif)
+                    </span>
+                  </Label>
+                  <div className="flex flex-col gap-2">
+                    {Object.entries(JOUR_SEMAINE_LABEL).map(([value, label]) => (
+                      <div key={value} className="flex items-center gap-2">
+                        <Checkbox
+                          id={`jour-${value}`}
+                          checked={(field.state.value ?? []).includes(value)}
+                          onCheckedChange={(checked) => {
+                            const current = field.state.value ?? [];
+                            field.handleChange(
+                              checked === true
+                                ? [...current, value]
+                                : current.filter((v) => v !== value),
+                            );
+                          }}
+                        />
+                        <Label
+                          htmlFor={`jour-${value}`}
+                          className="text-sm font-normal"
+                        >
+                          {label}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </form.Field>
+          </div>
 
           <form.Field name="pourquoi_maintenant">
             {(field) => (

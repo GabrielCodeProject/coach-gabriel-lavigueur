@@ -10,16 +10,14 @@ export type HomePageFrontmatter = PageFrontmatter & {
   hero_eyebrow: string;
   hero_title: string;
   hero_subtitle: string;
+  hero_body_text?: string;
   hero_cta_label: string;
   hero_image: string;
-  fitlog_highlight_title: string;
-  fitlog_highlight_body: string;
 };
 
 export type AboutPageFrontmatter = PageFrontmatter & {
   intro_title: string;
   intro_body: string;
-  credentials: readonly string[];
 };
 
 export type MethodStep = {

@@ -1,79 +1,41 @@
-import {
-  Smartphone,
-  Dumbbell,
-  Apple,
-  MessageSquareText,
-  LineChart,
-  Camera,
-} from "lucide-react";
+import { Smartphone, MessageCircle, TrendingUp } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-type FitlogHighlightSectionProps = {
-  title: string;
-  body: string;
-};
-
-const FITLOG_FEATURES = [
-  {
-    icon: Dumbbell,
-    label: "Programme d'entraînement",
-    description: "2500+ démonstrations vidéo.",
-  },
-  {
-    icon: Apple,
-    label: "Plan nutritionnel",
-    description: "Repas, portions, alternatives.",
-  },
-  {
-    icon: MessageSquareText,
-    label: "Chat direct avec Gabriel",
-    description: "Tes questions, mes réponses.",
-  },
-  {
-    icon: LineChart,
-    label: "Suivi de poids et mesures",
-    description: "Historique complet, tout au même endroit.",
-  },
-  {
-    icon: Camera,
-    label: "Photos de progrès",
-    description: "Avant-après bien organisés.",
-  },
+const COACHING_APP_FEATURES = [
   {
     icon: Smartphone,
-    label: "Sur ton téléphone",
-    description: "iOS et Android, inclus avec ton plan.",
+    title: "Ton plan partout",
+    description:
+      "Accède à ton plan d'entraînement et nutrition n'importe quand, depuis ton téléphone",
+  },
+  {
+    icon: MessageCircle,
+    title: "Contact direct",
+    description:
+      "Envoie un message directement dans l'app — pas de SMS perdu, pas d'email ignoré",
+  },
+  {
+    icon: TrendingUp,
+    title: "Tes progrès visibles",
+    description: "Vois tes métriques évoluer semaine après semaine",
   },
 ] as const;
 
-export function FitlogHighlightSection({
-  title,
-  body,
-}: FitlogHighlightSectionProps) {
+export function FitlogHighlightSection() {
   return (
     <section className="border-b border-border bg-card">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-20">
-        <div className="flex flex-col gap-4 md:max-w-2xl">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-            L'app Fitlog · Incluse avec ton plan
-          </span>
-          <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-4xl">
-            {title}
-          </h2>
-          <p className="text-pretty leading-relaxed text-muted-foreground">
-            {body}
-          </p>
-        </div>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {FITLOG_FEATURES.map((feature) => {
+        <h2 className="mb-10 text-balance text-3xl font-semibold tracking-tight md:text-4xl">
+          Ton coaching dans ta poche
+        </h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {COACHING_APP_FEATURES.map((feature) => {
             const Icon = feature.icon;
             return (
-              <Card key={feature.label} className="border-border/70">
-                <CardContent className="flex flex-col gap-2 p-5">
+              <Card key={feature.title} className="border-border/70">
+                <CardContent className="flex flex-col gap-3 p-5">
                   <Icon className="size-5 text-primary" aria-hidden="true" />
-                  <p className="text-sm font-semibold text-foreground">
-                    {feature.label}
-                  </p>
+                  <p className="font-semibold text-foreground">{feature.title}</p>
                   <p className="text-sm text-muted-foreground">
                     {feature.description}
                   </p>
@@ -82,6 +44,9 @@ export function FitlogHighlightSection({
             );
           })}
         </div>
+        <p className="mt-6 text-center text-xs text-muted-foreground">
+          via l&apos;application Fitlog
+        </p>
       </div>
     </section>
   );

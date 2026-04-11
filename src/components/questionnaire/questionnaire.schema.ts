@@ -88,6 +88,8 @@ export const questionnaireSchema = z.object({
     .refine((value) => value === true, {
       message: "Tu dois accepter la politique de confidentialité",
     }),
+  plages_horaires: z.array(z.string()),
+  jours_disponibles: z.array(z.string()),
 });
 
 export type QuestionnaireInput = z.infer<typeof questionnaireSchema>;
@@ -111,4 +113,6 @@ export const QUESTIONNAIRE_DEFAULT_VALUES: QuestionnaireInput = {
   pourquoi_maintenant: "",
   source: SOURCE_PROSPECT.GOOGLE,
   consentement_rgpd: false,
+  plages_horaires: [],
+  jours_disponibles: [],
 };

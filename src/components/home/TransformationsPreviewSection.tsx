@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/routes";
+import { BUSINESS } from "@/lib/business-data";
 import {
   TRANSFORMATION_GOAL_LABEL,
   type Transformation,
@@ -17,7 +18,7 @@ type TransformationsPreviewSectionProps = {
 export function TransformationsPreviewSection({
   transformations,
 }: TransformationsPreviewSectionProps) {
-  if (transformations.length === 0) {
+  if (!BUSINESS.transformations.enabled || transformations.length === 0) {
     return null;
   }
 

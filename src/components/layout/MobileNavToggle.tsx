@@ -11,9 +11,10 @@ import type { NavItem } from "./nav-items";
 type MobileNavToggleProps = {
   items: readonly NavItem[];
   contactHref: string;
+  ctaLabel?: string;
 };
 
-export function MobileNavToggle({ items, contactHref }: MobileNavToggleProps) {
+export function MobileNavToggle({ items, contactHref, ctaLabel = "Commencer" }: MobileNavToggleProps) {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -112,7 +113,7 @@ export function MobileNavToggle({ items, contactHref }: MobileNavToggleProps) {
                       "h-12 w-full px-6 text-base",
                     )}
                   >
-                    Remplir mon questionnaire
+                    {ctaLabel}
                   </Link>
                 </div>
               </nav>

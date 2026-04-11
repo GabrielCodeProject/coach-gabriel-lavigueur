@@ -9,10 +9,8 @@ export const BUSINESS = {
     firstName: "Gabriel",
     lastName: "Lavigueur",
     fullName: "Gabriel Lavigueur",
-    // TODO: ajouter certifications (ex. kinésiologue, entraîneur personnel certifié, etc.)
-    certifications: [] as readonly string[],
-    // TODO: années d'expérience
-    yearsOfExperience: 0,
+    certifications: ["Diplômé de l'Institut AAT"] as readonly string[],
+    yearsOfExperience: 13,
   },
 
   location: {
@@ -36,18 +34,53 @@ export const BUSINESS = {
   },
 
   contact: {
-    // TODO: courriel officiel du coach (servira aussi de destination Web3Forms)
-    email: "TODO@coachgabriellavigueur.ca",
-    // TODO: numéro de téléphone
+    email: "gabrielprivermsg@gmail.com",
+    // TODO: numéro de téléphone de la boutique Nutrition Suprême
     phone: "TODO",
-    // TODO: domaine final — placeholder GitHub Pages pour démarrer
-    website: "https://gabrielcodeproject.github.io/coach-gabriel-lavigueur/",
+    website: "https://coachgab.nutrition-supreme.com",
   },
 
   businessHours: {
     timezone: "America/Toronto",
-    // TODO: horaires réels des consultations au Nutrition Suprême
-    schedule: "TODO",
+    // Horaires de consultation au Nutrition Suprême — SSOT: modifier ici uniquement
+    schedule: [
+      { days: ["Thursday", "Friday"] as readonly string[], opens: "10:00", closes: "12:00" },
+      { days: ["Saturday"] as readonly string[], opens: "08:00", closes: "09:30" },
+      { days: ["Saturday"] as readonly string[], opens: "17:00", closes: "19:00" },
+    ],
+  },
+
+  cta: {
+    primary: "Dis-moi où tu en es",
+    nav: "Commencer",
+  },
+
+  stats: [
+    { value: "13 ans", label: "de pratique personnelle" },
+    { value: "Certifié", label: "Institut AAT" },
+    { value: "3", label: "transformations documentées" },
+  ],
+
+  socials: [
+    { platform: "instagram" as const, url: "", enabled: false as boolean },
+    { platform: "facebook" as const, url: "", enabled: false as boolean },
+  ],
+
+  testimonials: {
+    enabled: false as boolean,
+    philosophyQuote:
+      "Je ne vends pas une transformation express. Je construis avec toi les habitudes qui durent.",
+    items: [] as readonly { name: string; quote: string; enabled: boolean }[],
+  },
+
+  transformations: {
+    enabled: false as boolean,
+  },
+
+  credentials: {
+    formation:
+      "Diplômé de l'Institut AAT — formation qui a confirmé 13 ans de pratique personnelle",
+    equipe: "Coach au sein de l'équipe Nutrition Suprême, Sainte-Thérèse",
   },
 
   tools: {

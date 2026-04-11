@@ -73,3 +73,39 @@ export const SOURCE_PROSPECT_LABEL: Record<SourceProspect, string> = {
   "nutrition-supreme": "Au Nutrition Suprême",
   autre: "Autre",
 };
+
+export const PLAGE_HORAIRE = {
+  MATIN: "matin",
+  APRES_MIDI: "apres-midi",
+  SOIR: "soir",
+} as const;
+
+export type PlageHoraire = (typeof PLAGE_HORAIRE)[keyof typeof PLAGE_HORAIRE];
+
+export const PLAGE_HORAIRE_LABEL: Record<PlageHoraire, string> = {
+  matin: "Matin",
+  "apres-midi": "Après-midi",
+  soir: "Soir",
+};
+
+export const JOUR_SEMAINE = {
+  LUNDI: "lundi",
+  MARDI: "mardi",
+  MERCREDI: "mercredi",
+  JEUDI: "jeudi",
+  VENDREDI: "vendredi",
+  SAMEDI: "samedi",
+  DIMANCHE: "dimanche",
+} as const;
+
+export type JourSemaine = (typeof JOUR_SEMAINE)[keyof typeof JOUR_SEMAINE];
+
+export const JOUR_SEMAINE_LABEL: Record<JourSemaine, string> = {
+  lundi: "Lundi",
+  mardi: "Mardi",
+  mercredi: "Mercredi",
+  jeudi: "Jeudi",
+  vendredi: "Vendredi",
+  samedi: "Samedi",
+  dimanche: "Dimanche",
+};

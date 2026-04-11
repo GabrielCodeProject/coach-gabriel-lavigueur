@@ -44,7 +44,10 @@ export default function ServicesPage() {
         title={frontmatter.pricing_notice_title}
         body={frontmatter.pricing_notice_body}
       />
-      <CtaQuestionnaireBanner />
+      <CtaQuestionnaireBanner
+        title="Le bon service pour toi est là"
+        body="Choisis ton point d'entrée — on ajuste ensemble."
+      />
     </>
   );
 }

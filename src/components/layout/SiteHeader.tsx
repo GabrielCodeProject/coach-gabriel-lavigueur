@@ -43,9 +43,13 @@ export function SiteHeader() {
               "hidden h-10 px-4 text-sm md:inline-flex",
             )}
           >
-            Questionnaire
+            {BUSINESS.cta.nav}
           </Link>
-          <MobileNavToggle items={PRIMARY_NAV_ITEMS} contactHref={ROUTES.CONTACT} />
+          <MobileNavToggle
+            items={PRIMARY_NAV_ITEMS}
+            contactHref={ROUTES.CONTACT}
+            ctaLabel={BUSINESS.cta.nav}
+          />
         </div>
       </div>
     </header>

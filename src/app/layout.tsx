@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -29,6 +30,12 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
+        {/* Umami Analytics — TODO: remplacer PLACEHOLDER_UMAMI_ID par l'ID réel après création du compte umami.is */}
+        <Script
+          src="https://analytics.umami.is/script.js"
+          data-website-id="PLACEHOLDER_UMAMI_ID"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

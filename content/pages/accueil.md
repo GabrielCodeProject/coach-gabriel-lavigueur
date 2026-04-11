@@ -4,16 +4,13 @@ description: Coach Gabriel Lavigueur — Plans d'entraînement et nutrition
   personnalisés à Sainte-Thérèse, livrés via l'app Fitlog.
 hero_eyebrow: Coach Gab · Nutrition Suprême Sainte-Thérèse
 hero_title: Ton plan d'entraînement et de nutrition, bâti sur mesure pour toi.
-hero_subtitle: On se rencontre en personne au Nutrition Suprême, on discute de
-  ton corps, de ta vie et de tes objectifs. Une semaine plus tard, tu reçois ton
-  plan complet dans l'app Fitlog — avec accès direct à moi.
-hero_cta_label: Remplir mon questionnaire
+hero_subtitle: Les plans génériques ne fonctionnent pas parce qu'ils ne te
+  connaissent pas. Moi, je vais te connaître.
+hero_body_text: "T'as essayé. T'as recommencé. T'as suivi des plans qui ne
+  tenaient pas compte de ta vraie vie. Je construis avec toi la structure qui
+  dure — pas un template, ton plan."
+hero_cta_label: Dis-moi où tu en es
 hero_image: /images/default/hero-placeholder.jpg
-fitlog_highlight_title: Tout passe par l'app Fitlog — incluse avec ton plan.
-fitlog_highlight_body: Ton programme d'entraînement avec vidéos de
-  démonstration, ton plan alimentaire, tes photos de progrès, tes mesures, ton
-  suivi de poids et ton fil de discussion direct avec moi. Aucun abonnement
-  supplémentaire à payer.
 seo:
   title: Coach Gabriel Lavigueur — Nutrition et entraînement personnalisés
   description: Plans d'entraînement et nutrition sur mesure à Sainte-Thérèse.

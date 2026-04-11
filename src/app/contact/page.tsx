@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getPage } from "@/lib/content/get-page";
 import { buildMetadata } from "@/lib/seo/build-metadata";
 import { ROUTES } from "@/lib/routes";
@@ -49,6 +50,15 @@ export default function ContactPage() {
               <QuestionnaireForm />
               <p className="text-xs text-muted-foreground">
                 {frontmatter.response_time_note}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Une question avant de commencer ?{" "}
+                <Link
+                  href={ROUTES.FAQ}
+                  className="text-primary underline underline-offset-4 hover:text-primary/80"
+                >
+                  Consulte la FAQ
+                </Link>
               </p>
             </div>
           </div>

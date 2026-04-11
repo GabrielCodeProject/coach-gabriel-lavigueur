@@ -30,11 +30,11 @@ export default function MethodPage() {
         subtitle={frontmatter.intro}
       />
       <MethodSteps steps={frontmatter.steps} />
-      <FitlogHighlightSection
-        title="Tout passe par Fitlog — ton app de coaching"
-        body="Une fois ton plan livré, l'app Fitlog devient ton hub principal : ton programme d'entraînement, ton plan alimentaire, ton suivi de progrès, et un fil de discussion direct avec moi."
+      <FitlogHighlightSection />
+      <CtaQuestionnaireBanner
+        title="Tu connais comment je travaille"
+        body="La prochaine étape, c'est toi."
       />
-      <CtaQuestionnaireBanner />
     </>
   );
 }

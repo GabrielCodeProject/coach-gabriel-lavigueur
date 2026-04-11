@@ -32,14 +32,16 @@ export default function AboutPage() {
       <CoachIntroSection
         introTitle={frontmatter.intro_title}
         introBody={frontmatter.intro_body}
-        credentials={frontmatter.credentials}
       />
       <section className="bg-background">
         <div className="mx-auto w-full max-w-6xl px-4 py-14 md:px-6 md:py-20">
           <MarkdownBody>{body}</MarkdownBody>
         </div>
       </section>
-      <CtaQuestionnaireBanner />
+      <CtaQuestionnaireBanner
+        title="Tu sais qui je suis"
+        body="Maintenant dis-moi qui tu es et où tu veux aller."
+      />
     </>
   );
 }

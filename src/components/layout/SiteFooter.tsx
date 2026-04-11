@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone, ExternalLink } from "lucide-react";
 import { BUSINESS } from "@/lib/business-data";
 import { ROUTES } from "@/lib/routes";
 import { Separator } from "@/components/ui/separator";
@@ -89,6 +89,28 @@ export function SiteFooter() {
                   >
                     {BUSINESS.contact.phone}
                   </a>
+                </li>
+              ) : null}
+              {BUSINESS.socials.some((s) => s.enabled) ? (
+                <li className="flex items-center gap-3 pt-1">
+                  {BUSINESS.socials.map((social) => {
+                    if (!social.enabled) return null;
+                    const platformName =
+                      social.platform === "instagram" ? "Instagram" : "Facebook";
+                    return (
+                      <a
+                        key={social.platform}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+                        aria-label={`${platformName} de ${BUSINESS.coach.fullName}`}
+                      >
+                        <ExternalLink className="size-4" aria-hidden="true" />
+                        <span className="text-xs">{platformName}</span>
+                      </a>
+                    );
+                  })}
                 </li>
               ) : null}
             </ul>
