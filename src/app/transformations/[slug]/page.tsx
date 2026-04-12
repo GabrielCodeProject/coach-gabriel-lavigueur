@@ -15,7 +15,12 @@ import { CtaQuestionnaireBanner } from "@/components/home/CtaQuestionnaireBanner
 import { TRANSFORMATION_GOAL_LABEL } from "@/types/transformation.types";
 
 export function generateStaticParams() {
-  return getTransformationSlugs().map((slug) => ({ slug }));
+  const slugs = getTransformationSlugs();
+  // Next.js bug: output: export fails when generateStaticParams() returns [].
+  // Workaround: placeholder slug — page handles it via notFound().
+  // Ref: github.com/vercel/next.js/issues/61213
+  if (slugs.length === 0) return [{ slug: "_" }];
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata(
