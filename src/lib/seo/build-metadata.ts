@@ -11,12 +11,12 @@ type BuildMetadataInput = {
   seo?: SeoFields;
 };
 
-function absoluteUrl(pathOrUrl: string): string {
+export function absoluteUrl(pathOrUrl: string): string {
   if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) {
     return pathOrUrl;
   }
   const base = BUSINESS.contact.website.replace(/\/$/, "");
-  const prefix = env.NEXT_PUBLIC_BASE_PATH;
+  const prefix = env.NEXT_PUBLIC_BASE_PATH.replace(/\/$/, "");
   const normalizedPath = pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`;
   return `${base}${prefix}${normalizedPath}`;
 }

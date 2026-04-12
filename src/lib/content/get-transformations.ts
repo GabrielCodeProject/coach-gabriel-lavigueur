@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { listMarkdownSlugs, readMarkdown } from "./read-markdown";
+import { readMarkdown, listMarkdownSlugs } from "./read-markdown";
 import type {
   Transformation,
   TransformationFrontmatter,
@@ -18,7 +18,8 @@ export const getTransformations = cache((): Transformation[] => {
   return transformations.sort((a, b) => {
     const aTime = new Date(a.published_date).getTime();
     const bTime = new Date(b.published_date).getTime();
-    if (isNaN(aTime) || isNaN(bTime)) return 0;
+    if (isNaN(aTime)) throw new Error(`Invalid published_date in transformation "${a.slug}"`);
+    if (isNaN(bTime)) throw new Error(`Invalid published_date in transformation "${b.slug}"`);
     return bTime - aTime;
   });
 });
@@ -28,5 +29,5 @@ export function getFeaturedTransformations(): Transformation[] {
 }
 
 export function getTransformationSlugs(): string[] {
-  return listMarkdownSlugs(TRANSFORMATIONS_DIR);
+  return getTransformations().map((t) => t.slug);
 }

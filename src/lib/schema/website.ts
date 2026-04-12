@@ -1,17 +1,19 @@
 import { BUSINESS } from "@/lib/business-data";
+import { absoluteUrl } from "@/lib/seo/build-metadata";
 
 export function buildWebsiteSchema() {
+  const siteRoot = absoluteUrl("/");
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${BUSINESS.contact.website}#website`,
+    "@id": `${siteRoot}#website`,
     name: BUSINESS.name,
-    url: BUSINESS.contact.website,
+    url: siteRoot,
     description: BUSINESS.description,
     inLanguage: "fr-CA",
     publisher: {
       "@type": "LocalBusiness",
-      "@id": `${BUSINESS.contact.website}#business`,
+      "@id": `${siteRoot}#business`,
       name: BUSINESS.name,
     },
   };

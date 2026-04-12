@@ -1,22 +1,25 @@
 import { BUSINESS } from "@/lib/business-data";
+import { absoluteUrl } from "@/lib/seo/build-metadata";
 
 export function buildLocalBusinessSchema() {
+  const siteRoot = absoluteUrl("/");
   return {
     "@context": "https://schema.org",
     "@type": [BUSINESS.schemaType.main, BUSINESS.schemaType.subtype],
-    "@id": `${BUSINESS.contact.website}#business`,
+    "@id": `${siteRoot}#business`,
     name: BUSINESS.name,
     legalName: BUSINESS.legalName,
     description: BUSINESS.description,
-    url: BUSINESS.contact.website,
-    telephone: BUSINESS.contact.phone,
+    url: siteRoot,
+    // TODO: replace "TODO" values in business-data.ts with real address/phone before going live
+    ...(BUSINESS.contact.phone !== "TODO" && { telephone: BUSINESS.contact.phone }),
     email: BUSINESS.contact.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: BUSINESS.location.streetAddress,
+      ...(BUSINESS.location.streetAddress !== "TODO" && { streetAddress: BUSINESS.location.streetAddress }),
       addressLocality: BUSINESS.location.city,
       addressRegion: BUSINESS.location.province,
-      postalCode: BUSINESS.location.postalCode,
+      ...(BUSINESS.location.postalCode !== "TODO" && { postalCode: BUSINESS.location.postalCode }),
       addressCountry: BUSINESS.location.country,
     },
     geo: {

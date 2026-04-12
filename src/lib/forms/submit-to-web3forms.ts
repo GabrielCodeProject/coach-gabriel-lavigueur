@@ -8,10 +8,62 @@ export type Web3FormsResult =
   | { success: false; message: string };
 
 const FETCH_TIMEOUT_MS = 15_000;
+const RATE_LIMIT_KEY = "w3f_rl";
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+type RateLimitRecord = { count: number; windowStart: number };
+
+function checkRateLimit(): { allowed: boolean } {
+  try {
+    const raw = localStorage.getItem(RATE_LIMIT_KEY);
+    const now = Date.now();
+    const record: RateLimitRecord = raw
+      ? (JSON.parse(raw) as RateLimitRecord)
+      : { count: 0, windowStart: now };
+
+    if (now - record.windowStart > RATE_LIMIT_WINDOW_MS) {
+      // Window expired — reset
+      localStorage.setItem(
+        RATE_LIMIT_KEY,
+        JSON.stringify({ count: 1, windowStart: now }),
+      );
+      return { allowed: true };
+    }
+
+    if (record.count >= RATE_LIMIT_MAX) {
+      return { allowed: false };
+    }
+
+    localStorage.setItem(
+      RATE_LIMIT_KEY,
+      JSON.stringify({ count: record.count + 1, windowStart: record.windowStart }),
+    );
+    return { allowed: true };
+  } catch {
+    // localStorage unavailable (private browsing, etc.) — allow the request
+    return { allowed: true };
+  }
+}
 
 export async function submitToWeb3Forms(
   values: QuestionnaireInput,
 ): Promise<Web3FormsResult> {
+  if (!env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY) {
+    return {
+      success: false,
+      message: "Le formulaire n'est pas configuré. Contacte-moi directement par courriel.",
+    };
+  }
+
+  const rateLimit = checkRateLimit();
+  if (!rateLimit.allowed) {
+    return {
+      success: false,
+      message: `Limite atteinte — tu as déjà soumis ${RATE_LIMIT_MAX} questionnaires aujourd'hui. Réessaie demain ou contacte-moi directement.`,
+    };
+  }
+
   // Exclude the consent checkbox — it's UI-only and doesn't belong in the email
   const { consentement_rgpd: _consent, ...formFields } = values;
 
@@ -45,7 +97,13 @@ export async function submitToWeb3Forms(
       };
     }
 
-    const data: unknown = await response.json();
+    let data: unknown;
+    try {
+      data = await response.json();
+    } catch {
+      return { success: true, message: "Questionnaire envoyé avec succès." };
+    }
+
     const parsed = data as { success?: boolean; message?: string };
     if (parsed.success) {
       return {

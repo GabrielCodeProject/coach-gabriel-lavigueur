@@ -8,6 +8,7 @@ import { StructuredData } from "@/components/shared/StructuredData";
 import { buildRootMetadata } from "@/lib/seo/build-metadata";
 import { buildLocalBusinessSchema } from "@/lib/schema/local-business";
 import { buildWebsiteSchema } from "@/lib/schema/website";
+import { env } from "@/lib/env";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,15 +28,22 @@ export default function RootLayout({
         <StructuredData data={buildWebsiteSchema()} />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-background focus:px-4 focus:py-2 focus:text-foreground focus:outline focus:outline-2 focus:outline-primary"
+        >
+          Passer au contenu principal
+        </a>
         <SiteHeader />
-        <main className="flex flex-1 flex-col">{children}</main>
+        <main id="main-content" className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
-        {/* Umami Analytics — TODO: remplacer PLACEHOLDER_UMAMI_ID par l'ID réel après création du compte umami.is */}
-        <Script
-          src="https://analytics.umami.is/script.js"
-          data-website-id="PLACEHOLDER_UMAMI_ID"
-          strategy="afterInteractive"
-        />
+        {env.NEXT_PUBLIC_UMAMI_SITE_ID && (
+          <Script
+            src="https://analytics.umami.is/script.js"
+            data-website-id={env.NEXT_PUBLIC_UMAMI_SITE_ID}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );

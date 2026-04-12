@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useForm } from "@tanstack/react-form";
 import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
@@ -47,13 +47,16 @@ export function QuestionnaireForm() {
   const [submissionState, setSubmissionState] = useState<SubmissionState>({
     status: "idle",
   });
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
 
-  const form = useForm({
-    defaultValues: QUESTIONNAIRE_DEFAULT_VALUES,
-    validators: {
-      onSubmit: questionnaireSchema,
-    },
-    onSubmit: async ({ value }) => {
+  useEffect(() => {
+    if (submissionState.status === "success") {
+      successHeadingRef.current?.focus();
+    }
+  }, [submissionState.status]);
+
+  const handleSubmit = useCallback(
+    async ({ value }: { value: typeof QUESTIONNAIRE_DEFAULT_VALUES }) => {
       setSubmissionState({ status: "submitting" });
       const result = await submitToWeb3Forms(value as QuestionnaireInput);
       if (result.success) {
@@ -66,6 +69,15 @@ export function QuestionnaireForm() {
         setSubmissionState({ status: "error", message: result.message });
       }
     },
+    [],
+  );
+
+  const form = useForm({
+    defaultValues: QUESTIONNAIRE_DEFAULT_VALUES,
+    validators: {
+      onSubmit: questionnaireSchema,
+    },
+    onSubmit: handleSubmit,
   });
 
   if (submissionState.status === "success") {
@@ -76,7 +88,11 @@ export function QuestionnaireForm() {
             className="size-10 text-primary"
             aria-hidden="true"
           />
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h2
+            ref={successHeadingRef}
+            tabIndex={-1}
+            className="text-2xl font-semibold tracking-tight outline-none"
+          >
             Merci {submissionState.submittedName} !
           </h2>
           <p className="max-w-md text-pretty text-muted-foreground">
@@ -119,6 +135,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -141,6 +159,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -157,6 +177,8 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -176,6 +198,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -203,6 +227,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -223,6 +249,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -244,6 +272,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={NATIVE_SELECT_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 >
                   {Object.entries(NIVEAU_ACTIVITE_LABEL).map(([value, label]) => (
                     <option key={value} value={value}>
@@ -271,6 +301,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   rows={3}
                   placeholder="Ex. : j'ai fait de la course 3 fois par semaine pendant 2 ans, puis j'ai arrêté il y a 6 mois."
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -300,6 +332,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={NATIVE_SELECT_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 >
                   {Object.entries(OBJECTIF_PRINCIPAL_LABEL).map(([value, label]) => (
                     <option key={value} value={value}>
@@ -330,6 +364,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -357,6 +393,8 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   rows={2}
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -376,6 +414,8 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   rows={2}
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -396,6 +436,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
                   placeholder="Ex. : végétarien, intolérance au lactose"
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -428,6 +470,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -449,6 +493,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={NATIVE_SELECT_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 >
                   {Object.entries(BUDGET_FOURCHETTE_LABEL).map(([value, label]) => (
                     <option key={value} value={value}>
@@ -477,6 +523,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   className={NATIVE_SELECT_CLASS}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 >
                   {Object.entries(SOURCE_PROSPECT_LABEL).map(([value, label]) => (
                     <option key={value} value={value}>
@@ -492,75 +540,39 @@ export function QuestionnaireForm() {
           <div className="grid grid-cols-2 gap-4 md:col-span-2">
             <form.Field name="plages_horaires">
               {(field) => (
-                <div className="flex flex-col gap-3">
-                  <Label className="text-sm font-medium">
-                    Plage horaire préférée{" "}
-                    <span className="text-xs font-normal text-muted-foreground">
-                      (facultatif)
-                    </span>
-                  </Label>
-                  <div className="flex flex-col gap-2">
-                    {Object.entries(PLAGE_HORAIRE_LABEL).map(([value, label]) => (
-                      <div key={value} className="flex items-center gap-2">
-                        <Checkbox
-                          id={`plage-${value}`}
-                          checked={(field.state.value ?? []).includes(value)}
-                          onCheckedChange={(checked) => {
-                            const current = field.state.value ?? [];
-                            field.handleChange(
-                              checked === true
-                                ? [...current, value]
-                                : current.filter((v) => v !== value),
-                            );
-                          }}
-                        />
-                        <Label
-                          htmlFor={`plage-${value}`}
-                          className="text-sm font-normal"
-                        >
-                          {label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <CheckboxGroupField
+                  legend="Plage horaire préférée"
+                  optional
+                  idPrefix="plage"
+                  options={PLAGE_HORAIRE_LABEL}
+                  value={field.state.value ?? []}
+                  onChange={(checked, value) => {
+                    const current = field.state.value ?? [];
+                    const next = checked
+                      ? [...current, value]
+                      : current.filter((v) => v !== value);
+                    field.handleChange(next as typeof current);
+                  }}
+                />
               )}
             </form.Field>
 
             <form.Field name="jours_disponibles">
               {(field) => (
-                <div className="flex flex-col gap-3">
-                  <Label className="text-sm font-medium">
-                    Jours disponibles{" "}
-                    <span className="text-xs font-normal text-muted-foreground">
-                      (facultatif)
-                    </span>
-                  </Label>
-                  <div className="flex flex-col gap-2">
-                    {Object.entries(JOUR_SEMAINE_LABEL).map(([value, label]) => (
-                      <div key={value} className="flex items-center gap-2">
-                        <Checkbox
-                          id={`jour-${value}`}
-                          checked={(field.state.value ?? []).includes(value)}
-                          onCheckedChange={(checked) => {
-                            const current = field.state.value ?? [];
-                            field.handleChange(
-                              checked === true
-                                ? [...current, value]
-                                : current.filter((v) => v !== value),
-                            );
-                          }}
-                        />
-                        <Label
-                          htmlFor={`jour-${value}`}
-                          className="text-sm font-normal"
-                        >
-                          {label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <CheckboxGroupField
+                  legend="Jours disponibles"
+                  optional
+                  idPrefix="jour"
+                  options={JOUR_SEMAINE_LABEL}
+                  value={field.state.value ?? []}
+                  onChange={(checked, value) => {
+                    const current = field.state.value ?? [];
+                    const next = checked
+                      ? [...current, value]
+                      : current.filter((v) => v !== value);
+                    field.handleChange(next as typeof current);
+                  }}
+                />
               )}
             </form.Field>
           </div>
@@ -583,6 +595,8 @@ export function QuestionnaireForm() {
                   onBlur={field.handleBlur}
                   rows={5}
                   required
+                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
             )}
@@ -649,6 +663,49 @@ export function QuestionnaireForm() {
         </Button>
       </div>
     </form>
+  );
+}
+
+type CheckboxGroupFieldProps = {
+  legend: string;
+  optional?: boolean;
+  idPrefix: string;
+  options: Record<string, string>;
+  value: string[];
+  onChange: (checked: boolean, value: string) => void;
+};
+
+function CheckboxGroupField({
+  legend,
+  optional,
+  idPrefix,
+  options,
+  value,
+  onChange,
+}: CheckboxGroupFieldProps) {
+  return (
+    <fieldset className="flex flex-col gap-3">
+      <legend className="text-sm font-medium">
+        {legend}{" "}
+        {optional ? (
+          <span className="text-xs font-normal text-muted-foreground">(facultatif)</span>
+        ) : null}
+      </legend>
+      <div className="flex flex-col gap-2">
+        {Object.entries(options).map(([optValue, label]) => (
+          <div key={optValue} className="flex items-center gap-2">
+            <Checkbox
+              id={`${idPrefix}-${optValue}`}
+              checked={value.includes(optValue)}
+              onCheckedChange={(checked) => onChange(checked === true, optValue)}
+            />
+            <Label htmlFor={`${idPrefix}-${optValue}`} className="text-sm font-normal">
+              {label}
+            </Label>
+          </div>
+        ))}
+      </div>
+    </fieldset>
   );
 }
 

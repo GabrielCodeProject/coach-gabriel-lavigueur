@@ -3,14 +3,10 @@ import { MapPin, Mail, Phone, ExternalLink } from "lucide-react";
 import { BUSINESS } from "@/lib/business-data";
 import { ROUTES } from "@/lib/routes";
 import { Separator } from "@/components/ui/separator";
+import { PRIMARY_NAV_ITEMS } from "./nav-items";
 
-const SECONDARY_NAV = [
-  { label: "Accueil", href: ROUTES.HOME },
-  { label: "À propos", href: ROUTES.ABOUT },
-  { label: "Ma méthode", href: ROUTES.METHOD },
-  { label: "Mes services", href: ROUTES.SERVICES },
-  { label: "Transformations", href: ROUTES.TRANSFORMATIONS },
-  { label: "FAQ", href: ROUTES.FAQ },
+const FOOTER_NAV = [
+  ...PRIMARY_NAV_ITEMS,
   { label: "Contact", href: ROUTES.CONTACT },
 ] as const;
 
@@ -45,7 +41,7 @@ export function SiteFooter() {
               Navigation
             </h2>
             <ul className="grid grid-cols-2 gap-2">
-              {SECONDARY_NAV.map((item) => (
+              {FOOTER_NAV.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

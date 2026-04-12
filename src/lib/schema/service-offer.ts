@@ -1,8 +1,10 @@
 import { BUSINESS } from "@/lib/business-data";
 import { CURRENCY_CODE } from "@/lib/constants";
+import { absoluteUrl } from "@/lib/seo/build-metadata";
 import type { Service } from "@/types/service.types";
 
 export function buildOfferCatalogSchema(services: readonly Service[]) {
+  const siteRoot = absoluteUrl("/");
   return {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
@@ -21,7 +23,7 @@ export function buildOfferCatalogSchema(services: readonly Service[]) {
         provider: {
           "@type": "LocalBusiness",
           name: BUSINESS.name,
-          "@id": `${BUSINESS.contact.website}#business`,
+          "@id": `${siteRoot}#business`,
         },
       },
     })),

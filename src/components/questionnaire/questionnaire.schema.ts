@@ -4,6 +4,8 @@ import {
   OBJECTIF_PRINCIPAL,
   BUDGET_FOURCHETTE,
   SOURCE_PROSPECT,
+  PLAGE_HORAIRE,
+  JOUR_SEMAINE,
 } from "@/types/questionnaire.types";
 
 export const questionnaireSchema = z.object({
@@ -88,8 +90,20 @@ export const questionnaireSchema = z.object({
     .refine((value) => value === true, {
       message: "Tu dois accepter la politique de confidentialité",
     }),
-  plages_horaires: z.array(z.string()),
-  jours_disponibles: z.array(z.string()),
+  plages_horaires: z.array(
+    z.enum([PLAGE_HORAIRE.MATIN, PLAGE_HORAIRE.APRES_MIDI, PLAGE_HORAIRE.SOIR]),
+  ),
+  jours_disponibles: z.array(
+    z.enum([
+      JOUR_SEMAINE.LUNDI,
+      JOUR_SEMAINE.MARDI,
+      JOUR_SEMAINE.MERCREDI,
+      JOUR_SEMAINE.JEUDI,
+      JOUR_SEMAINE.VENDREDI,
+      JOUR_SEMAINE.SAMEDI,
+      JOUR_SEMAINE.DIMANCHE,
+    ]),
+  ),
 });
 
 export type QuestionnaireInput = z.infer<typeof questionnaireSchema>;

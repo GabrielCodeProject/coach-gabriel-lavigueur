@@ -1,12 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { NavItem } from "./nav-items";
+
+const FOCUSABLE_SELECTORS =
+  'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 type MobileNavToggleProps = {
   items: readonly NavItem[];
@@ -18,11 +21,12 @@ export function MobileNavToggle({ items, contactHref, ctaLabel = "Commencer" }: 
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsOpen(false);
     triggerRef.current?.focus();
-  };
+  }, []);
 
   // Lock body scroll and move focus into the dialog when open
   useEffect(() => {
@@ -35,15 +39,37 @@ export function MobileNavToggle({ items, contactHref, ctaLabel = "Commencer" }: 
     };
   }, [isOpen]);
 
-  // Escape key closes the dialog
+  // Escape key closes the dialog; Tab/Shift+Tab traps focus inside
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose();
+      if (e.key === "Escape") {
+        handleClose();
+        return;
+      }
+      if (e.key === "Tab" && dialogRef.current) {
+        const focusable = Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS),
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isOpen, handleClose]);
 
   // Restore scroll if the component unmounts while open
   useEffect(() => {
@@ -70,6 +96,7 @@ export function MobileNavToggle({ items, contactHref, ctaLabel = "Commencer" }: 
       {isOpen
         ? createPortal(
             <div
+              ref={dialogRef}
               className="fixed inset-0 z-50 flex flex-col bg-background md:hidden"
               role="dialog"
               aria-modal="true"
