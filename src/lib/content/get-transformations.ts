@@ -1,31 +1,30 @@
 import { cache } from "react";
 import { readMarkdown, listMarkdownSlugs } from "./read-markdown";
-import type {
-  Transformation,
-  TransformationFrontmatter,
-} from "@/types/transformation.types";
+import { transformationFrontmatterSchema } from "@/lib/schemas/transformation.schema";
+import type { Transformation } from "@/lib/schemas/transformation.schema";
 
 const TRANSFORMATIONS_DIR = "content/transformations";
 
 export const getTransformations = cache((): Transformation[] => {
   const slugs = listMarkdownSlugs(TRANSFORMATIONS_DIR);
   const transformations = slugs.map((slug) => {
-    const { frontmatter, body } = readMarkdown<TransformationFrontmatter>(
+    const { frontmatter, body } = readMarkdown(
       `${TRANSFORMATIONS_DIR}/${slug}.md`,
+      transformationFrontmatterSchema,
     );
     return { ...frontmatter, slug, body };
   });
-  return transformations.sort((a, b) => {
-    const aTime = new Date(a.published_date).getTime();
-    const bTime = new Date(b.published_date).getTime();
-    if (isNaN(aTime)) throw new Error(`Invalid published_date in transformation "${a.slug}"`);
-    if (isNaN(bTime)) throw new Error(`Invalid published_date in transformation "${b.slug}"`);
-    return bTime - aTime;
-  });
+  // published_date format is guaranteed YYYY-MM-DD by the schema regex —
+  // no manual isNaN guard needed here.
+  return transformations.sort(
+    (a, b) =>
+      new Date(b.published_date).getTime() -
+      new Date(a.published_date).getTime(),
+  );
 });
 
 export function getFeaturedTransformations(): Transformation[] {
-  return getTransformations().filter((transformation) => transformation.featured);
+  return getTransformations().filter((t) => t.featured);
 }
 
 export function getTransformationSlugs(): string[] {

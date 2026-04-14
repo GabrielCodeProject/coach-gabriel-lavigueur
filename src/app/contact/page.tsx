@@ -3,16 +3,16 @@ import Link from "next/link";
 import { getPage } from "@/lib/content/get-page";
 import { buildMetadata } from "@/lib/seo/build-metadata";
 import { ROUTES } from "@/lib/routes";
+import { contactPageSchema } from "@/lib/schemas/page.schema";
 import { PageHero } from "@/components/shared/PageHero";
 import { ContactInfoBlock } from "@/components/contact/ContactInfoBlock";
 import { StoreLocationMap } from "@/components/contact/StoreLocationMap";
 import { QuestionnaireForm } from "@/components/questionnaire/QuestionnaireForm";
-import type { ContactPageFrontmatter } from "@/types/page.types";
 
 const SLUG = "contact";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { frontmatter } = getPage<ContactPageFrontmatter>(SLUG);
+  const { frontmatter } = getPage(SLUG, contactPageSchema);
   return buildMetadata({
     pageTitle: frontmatter.title,
     pageDescription: frontmatter.description,
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function ContactPage() {
-  const { frontmatter } = getPage<ContactPageFrontmatter>(SLUG);
+  const { frontmatter } = getPage(SLUG, contactPageSchema);
   return (
     <>
       <PageHero

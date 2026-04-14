@@ -4,17 +4,17 @@ import { getServices } from "@/lib/content/get-services";
 import { buildMetadata } from "@/lib/seo/build-metadata";
 import { buildOfferCatalogSchema } from "@/lib/schema/service-offer";
 import { ROUTES } from "@/lib/routes";
+import { servicesPageSchema } from "@/lib/schemas/page.schema";
 import { PageHero } from "@/components/shared/PageHero";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { PricingNotice } from "@/components/services/PricingNotice";
 import { StructuredData } from "@/components/shared/StructuredData";
 import { CtaQuestionnaireBanner } from "@/components/home/CtaQuestionnaireBanner";
-import type { ServicesPageFrontmatter } from "@/types/page.types";
 
 const SLUG = "mes-services";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { frontmatter } = getPage<ServicesPageFrontmatter>(SLUG);
+  const { frontmatter } = getPage(SLUG, servicesPageSchema);
   return buildMetadata({
     pageTitle: frontmatter.title,
     pageDescription: frontmatter.description,
@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function ServicesPage() {
-  const { frontmatter } = getPage<ServicesPageFrontmatter>(SLUG);
+  const { frontmatter } = getPage(SLUG, servicesPageSchema);
   const services = getServices();
 
   return (

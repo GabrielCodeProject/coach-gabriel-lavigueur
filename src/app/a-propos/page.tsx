@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import { getPage } from "@/lib/content/get-page";
 import { buildMetadata } from "@/lib/seo/build-metadata";
 import { ROUTES } from "@/lib/routes";
+import { aboutPageSchema } from "@/lib/schemas/page.schema";
 import { PageHero } from "@/components/shared/PageHero";
 import { CoachIntroSection } from "@/components/about/CoachIntroSection";
 import { MarkdownBody } from "@/components/shared/MarkdownBody";
 import { CtaQuestionnaireBanner } from "@/components/home/CtaQuestionnaireBanner";
-import type { AboutPageFrontmatter } from "@/types/page.types";
 
 const SLUG = "a-propos";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { frontmatter } = getPage<AboutPageFrontmatter>(SLUG);
+  const { frontmatter } = getPage(SLUG, aboutPageSchema);
   return buildMetadata({
     pageTitle: frontmatter.title,
     pageDescription: frontmatter.description,
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function AboutPage() {
-  const { frontmatter, body } = getPage<AboutPageFrontmatter>(SLUG);
+  const { frontmatter, body } = getPage(SLUG, aboutPageSchema);
   return (
     <>
       <PageHero

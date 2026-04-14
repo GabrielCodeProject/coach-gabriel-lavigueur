@@ -1,18 +1,16 @@
 import { cache } from "react";
 import { listMarkdownSlugs, readMarkdown } from "./read-markdown";
-import type {
-  Service,
-  ServiceFrontmatter,
-  ServiceId,
-} from "@/types/service.types";
+import { serviceFrontmatterSchema } from "@/lib/schemas/service.schema";
+import type { Service, ServiceId } from "@/lib/schemas/service.schema";
 
 const SERVICES_DIR = "content/services";
 
 export const getServices = cache((): Service[] => {
   const slugs = listMarkdownSlugs(SERVICES_DIR);
   const services = slugs.map((slug) => {
-    const { frontmatter } = readMarkdown<ServiceFrontmatter>(
+    const { frontmatter } = readMarkdown(
       `${SERVICES_DIR}/${slug}.md`,
+      serviceFrontmatterSchema,
     );
     return { ...frontmatter, slug };
   });
