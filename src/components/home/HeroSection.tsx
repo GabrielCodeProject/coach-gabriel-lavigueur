@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/routes";
 import { BUSINESS } from "@/lib/business-data";
+import { env } from "@/lib/env";
 import { StatBar } from "@/components/home/StatBar";
 
 type HeroSectionProps = {
@@ -77,7 +78,7 @@ export function HeroSection({
             {heroImage ? (
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl">
                 <Image
-                  src={heroImage}
+                  src={`${env.NEXT_PUBLIC_BASE_PATH}${heroImage}`}
                   alt="Photo du coach Gabriel Lavigueur"
                   fill
                   className="object-cover"

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ROUTES } from "@/lib/routes";
+import { env } from "@/lib/env";
 import {
   TRANSFORMATION_GOAL_LABEL,
   type Transformation,
@@ -22,13 +23,13 @@ export function TransformationCard({ transformation }: TransformationCardProps) 
         <div className="grid grid-cols-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={transformation.before_image}
+            src={`${env.NEXT_PUBLIC_BASE_PATH}${transformation.before_image}`}
             alt={`Avant — ${transformation.client_name}`}
             className="aspect-[4/5] w-full bg-muted object-cover"
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={transformation.after_image}
+            src={`${env.NEXT_PUBLIC_BASE_PATH}${transformation.after_image}`}
             alt={`Après — ${transformation.client_name}`}
             className="aspect-[4/5] w-full bg-muted object-cover"
           />

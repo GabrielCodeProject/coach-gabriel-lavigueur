@@ -1,3 +1,5 @@
+import { env } from "@/lib/env";
+
 type BeforeAfterImagesProps = {
   beforeSrc: string;
   afterSrc: string;
@@ -15,7 +17,7 @@ export function BeforeAfterImages({
         <div className="overflow-hidden rounded-xl border border-border bg-muted">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={beforeSrc}
+            src={`${env.NEXT_PUBLIC_BASE_PATH}${beforeSrc}`}
             alt={`Avant — ${clientName}`}
             className="aspect-[3/4] w-full object-cover"
           />
@@ -28,7 +30,7 @@ export function BeforeAfterImages({
         <div className="overflow-hidden rounded-xl border border-border bg-muted">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={afterSrc}
+            src={`${env.NEXT_PUBLIC_BASE_PATH}${afterSrc}`}
             alt={`Après — ${clientName}`}
             className="aspect-[3/4] w-full object-cover"
           />
