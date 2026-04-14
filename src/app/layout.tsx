@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { StructuredData } from "@/components/shared/StructuredData";
 import { buildRootMetadata } from "@/lib/seo/build-metadata";
 import { buildLocalBusinessSchema } from "@/lib/schema/local-business";
@@ -22,28 +23,30 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr-CA" className={`${inter.variable} h-full`}>
+    <html lang="fr-CA" className={`${inter.variable} h-full`} suppressHydrationWarning>
       <head>
         <StructuredData data={buildLocalBusinessSchema()} />
         <StructuredData data={buildWebsiteSchema()} />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground antialiased">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-background focus:px-4 focus:py-2 focus:text-foreground focus:outline focus:outline-2 focus:outline-primary"
-        >
-          Passer au contenu principal
-        </a>
-        <SiteHeader />
-        <main id="main-content" className="flex flex-1 flex-col">{children}</main>
-        <SiteFooter />
-        {env.NEXT_PUBLIC_UMAMI_SITE_ID && (
-          <Script
-            src="https://analytics.umami.is/script.js"
-            data-website-id={env.NEXT_PUBLIC_UMAMI_SITE_ID}
-            strategy="afterInteractive"
-          />
-        )}
+        <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-background focus:px-4 focus:py-2 focus:text-foreground focus:outline focus:outline-2 focus:outline-primary"
+          >
+            Passer au contenu principal
+          </a>
+          <SiteHeader />
+          <main id="main-content" className="flex flex-1 flex-col">{children}</main>
+          <SiteFooter />
+          {env.NEXT_PUBLIC_UMAMI_SITE_ID && (
+            <Script
+              src="https://analytics.umami.is/script.js"
+              data-website-id={env.NEXT_PUBLIC_UMAMI_SITE_ID}
+              strategy="afterInteractive"
+            />
+          )}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -13,9 +13,9 @@ Ce site est édité par :
 
 **Gabriel Lavigueur**
 Coach en nutrition et entraînement
-Adresse : Nutrition Suprême, Sainte-Thérèse, Québec, Canada (TODO — adresse exacte)
-Courriel : TODO (à compléter)
-Téléphone : TODO (à compléter)
+Adresse : 204 rue Saint-Charles, Suite 105, Sainte-Thérèse, QC J7E 2B4
+Courriel : gabrielprivermsg@gmail.com
+Téléphone : 450 434-0882
 
 ## Hébergement
 

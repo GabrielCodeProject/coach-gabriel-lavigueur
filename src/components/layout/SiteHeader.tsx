@@ -7,6 +7,7 @@ import { BUSINESS } from "@/lib/business-data";
 import { env } from "@/lib/env";
 import { PRIMARY_NAV_ITEMS } from "./nav-items";
 import { MobileNavToggle } from "./MobileNavToggle";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function SiteHeader() {
   return (
@@ -40,6 +41,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 md:ml-4">
+          <ThemeToggle />
           <Link
             href={ROUTES.CONTACT}
             className={cn(

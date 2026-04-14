@@ -29,7 +29,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "pnpm"
 
       - name: Setup Pages
@@ -54,6 +54,7 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: /coach-gabriel-lavigueur
           NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
+          NEXT_PUBLIC_UMAMI_SITE_ID: ${{ secrets.NEXT_PUBLIC_UMAMI_SITE_ID }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

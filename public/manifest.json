@@ -1,0 +1,12 @@
+{
+  "name": "Coach Gabriel Lavigueur",
+  "short_name": "Coach Gabriel",
+  "description": "Plans d'entraînement et nutritionnels personnalisés — Sainte-Thérèse",
+  "start_url": "/coach-gabriel-lavigueur/",
+  "display": "standalone",
+  "background_color": "#fbf7f0",
+  "theme_color": "#c87533",
+  "icons": [
+    { "src": "/images/default/logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

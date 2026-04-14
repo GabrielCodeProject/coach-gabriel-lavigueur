@@ -13,7 +13,7 @@ Le responsable du traitement des données personnelles collectées sur ce site e
 
 **Gabriel Lavigueur**
 Nutrition Suprême, Sainte-Thérèse, Québec, Canada
-Courriel : TODO (à compléter)
+Courriel : gabrielprivermsg@gmail.com
 
 ## Données collectées
 
