@@ -40,20 +40,28 @@ collections:
               widget: "text",
             }
           - {
+              label: "Hero — Texte du corps",
+              name: "hero_body_text",
+              widget: "text",
+              required: false,
+            }
+          - {
               label: "Hero — Libellé du bouton CTA",
               name: "hero_cta_label",
               widget: "string",
             }
-          - { label: "Hero — Image", name: "hero_image", widget: "image" }
+          - { label: "Hero — Image", name: "hero_image", widget: "image", required: false }
           - {
               label: "Fitlog — Titre",
               name: "fitlog_highlight_title",
               widget: "string",
+              required: false,
             }
           - {
               label: "Fitlog — Corps",
               name: "fitlog_highlight_body",
               widget: "text",
+              required: false,
             }
           - label: "SEO"
             name: "seo"

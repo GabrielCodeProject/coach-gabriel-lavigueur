@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, ImageIcon } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
@@ -12,6 +13,7 @@ type HeroSectionProps = {
   subtitle: string;
   bodyText?: string;
   ctaLabel: string;
+  heroImage?: string;
 };
 
 export function HeroSection({
@@ -20,6 +22,7 @@ export function HeroSection({
   subtitle,
   bodyText,
   ctaLabel,
+  heroImage,
 }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden border-b border-border bg-background">
@@ -69,12 +72,24 @@ export function HeroSection({
             </p>
           </div>
 
-          {/* Image placeholder — visible on desktop only */}
+          {/* Hero image — visible on desktop only */}
           <div className="hidden lg:block">
-            <div className="flex aspect-[3/4] w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl bg-muted text-muted-foreground">
-              <ImageIcon className="size-8" aria-hidden="true" />
-              <span className="text-xs">Photo — Portrait bureau</span>
-            </div>
+            {heroImage ? (
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl">
+                <Image
+                  src={heroImage}
+                  alt="Photo du coach Gabriel Lavigueur"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            ) : (
+              <div className="flex aspect-[3/4] w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl bg-muted text-muted-foreground">
+                <ImageIcon className="size-8" aria-hidden="true" />
+                <span className="text-xs">Photo — Portrait bureau</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

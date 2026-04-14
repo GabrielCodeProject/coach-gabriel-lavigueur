@@ -34,6 +34,7 @@ export default function HomePage() {
         subtitle={frontmatter.hero_subtitle}
         bodyText={frontmatter.hero_body_text}
         ctaLabel={frontmatter.hero_cta_label}
+        heroImage={frontmatter.hero_image}
       />
       <FitlogHighlightSection />
       <ServiceTeaser />

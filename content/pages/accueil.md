@@ -6,13 +6,11 @@ hero_eyebrow: Coach Gab · Nutrition Suprême Sainte-Thérèse
 hero_title: Ton plan d'entraînement et de nutrition, bâti sur mesure pour toi.
 hero_subtitle: Les plans génériques ne fonctionnent pas parce qu'ils ne te
   connaissent pas. Moi, je vais te connaître.
-hero_cta_label: Dis-moi où tu en es
-fitlog_highlight_title: test
 hero_body_text: T'as essayé. T'as recommencé. T'as suivi des plans qui ne
   tenaient pas compte de ta vraie vie. Je construis avec toi la structure qui
   dure — pas un template, ton plan.
+hero_cta_label: Dis-moi où tu en es
 hero_image: /images/uploads/elite-coach-hero-1-.png
-fitlog_highlight_body: test
 seo:
   title: Coach Gabriel Lavigueur — Nutrition et entraînement personnalisés
   description: Plans d'entraînement et nutrition sur mesure à Sainte-Thérèse.

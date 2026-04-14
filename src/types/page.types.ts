@@ -12,7 +12,9 @@ export type HomePageFrontmatter = PageFrontmatter & {
   hero_subtitle: string;
   hero_body_text?: string;
   hero_cta_label: string;
-  hero_image: string;
+  hero_image?: string;
+  fitlog_highlight_title?: string;
+  fitlog_highlight_body?: string;
 };
 
 export type AboutPageFrontmatter = PageFrontmatter & {
