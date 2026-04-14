@@ -41,7 +41,7 @@ export default function RootLayout({
           <SiteFooter />
           {env.NEXT_PUBLIC_UMAMI_SITE_ID && (
             <Script
-              src="https://analytics.umami.is/script.js"
+              src="https://cloud.umami.is/script.js"
               data-website-id={env.NEXT_PUBLIC_UMAMI_SITE_ID}
               strategy="afterInteractive"
             />

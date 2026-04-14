@@ -5,8 +5,8 @@ const envSchema = z.object({
   // Empty string default: dev works without the key (form shows error on submit);
   // CI must set this via NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY secret — see deploy.yml.
   NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: z.string().default(""),
-  // Umami analytics site ID — leave empty until account is created at umami.is
-  NEXT_PUBLIC_UMAMI_SITE_ID: z.string().default(""),
+  // Umami Cloud analytics site ID — public value, safe to ship in source
+  NEXT_PUBLIC_UMAMI_SITE_ID: z.string().default("4479bc09-0439-43f5-8c09-fd61050abab1"),
 });
 
 export const env = envSchema.parse({
