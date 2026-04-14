@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Mail, Phone, ExternalLink } from "lucide-react";
 import { BUSINESS } from "@/lib/business-data";
 import { ROUTES } from "@/lib/routes";
+import { env } from "@/lib/env";
 import { Separator } from "@/components/ui/separator";
 import { PRIMARY_NAV_ITEMS } from "./nav-items";
 
@@ -23,14 +25,19 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-6xl px-4 py-12 md:px-6">
         <div className="grid gap-10 md:grid-cols-3">
           <div className="flex flex-col gap-3">
-            <div className="flex flex-col leading-none">
-              <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                Coach
-              </span>
-              <span className="text-lg font-semibold tracking-tight">
-                {BUSINESS.coach.fullName}
-              </span>
-            </div>
+            <Link
+              href={ROUTES.HOME}
+              aria-label={`Accueil — ${BUSINESS.name}`}
+              className="self-start transition-opacity hover:opacity-80"
+            >
+              <Image
+                src={`${env.NEXT_PUBLIC_BASE_PATH}/images/default/logo.png`}
+                alt={BUSINESS.name}
+                width={600}
+                height={471}
+                className="h-16 w-auto object-contain dark:brightness-0 dark:invert"
+              />
+            </Link>
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
               {BUSINESS.tagline}
             </p>

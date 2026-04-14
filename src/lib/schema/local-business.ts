@@ -11,6 +11,12 @@ export function buildLocalBusinessSchema() {
     legalName: BUSINESS.legalName,
     description: BUSINESS.description,
     url: siteRoot,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteRoot}images/default/logo.png`,
+      width: 600,
+      height: 471,
+    },
     // TODO: replace "TODO" values in business-data.ts with real address/phone before going live
     ...(BUSINESS.contact.phone !== "TODO" && { telephone: BUSINESS.contact.phone }),
     email: BUSINESS.contact.email,

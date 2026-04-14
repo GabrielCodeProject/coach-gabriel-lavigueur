@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/routes";
 import { BUSINESS } from "@/lib/business-data";
+import { env } from "@/lib/env";
 import { PRIMARY_NAV_ITEMS } from "./nav-items";
 import { MobileNavToggle } from "./MobileNavToggle";
 
@@ -12,15 +14,17 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center gap-4 px-4 md:px-6">
         <Link
           href={ROUTES.HOME}
-          className="flex flex-col leading-none text-foreground transition-colors hover:text-primary"
           aria-label={`Accueil — ${BUSINESS.name}`}
+          className="shrink-0 transition-opacity hover:opacity-80"
         >
-          <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-            Coach
-          </span>
-          <span className="text-base font-semibold tracking-tight">
-            Gabriel Lavigueur
-          </span>
+          <Image
+            src={`${env.NEXT_PUBLIC_BASE_PATH}/images/default/logo.png`}
+            alt={BUSINESS.name}
+            width={600}
+            height={471}
+            className="h-11 w-auto object-contain dark:brightness-0 dark:invert"
+            priority
+          />
         </Link>
 
         <nav className="ml-auto hidden items-center gap-1 md:flex">
