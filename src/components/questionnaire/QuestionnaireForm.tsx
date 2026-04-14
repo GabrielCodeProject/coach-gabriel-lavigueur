@@ -134,7 +134,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 />
@@ -158,7 +157,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 />
@@ -197,7 +195,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(Number(e.target.value))}
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 />
@@ -226,7 +223,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(Number(e.target.value))}
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 />
@@ -248,7 +244,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(Number(e.target.value))}
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 />
@@ -271,7 +266,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value as QuestionnaireInput["niveau_activite"])}
                   onBlur={field.handleBlur}
                   className={NATIVE_SELECT_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 >
@@ -331,7 +325,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value as QuestionnaireInput["objectif_principal"])}
                   onBlur={field.handleBlur}
                   className={NATIVE_SELECT_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 >
@@ -363,7 +356,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(Number(e.target.value))}
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 />
@@ -469,7 +461,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(Number(e.target.value))}
                   onBlur={field.handleBlur}
                   className={INPUT_TALL_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 />
@@ -492,7 +483,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value as QuestionnaireInput["budget_fourchette"])}
                   onBlur={field.handleBlur}
                   className={NATIVE_SELECT_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 >
@@ -522,7 +512,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value as QuestionnaireInput["source"])}
                   onBlur={field.handleBlur}
                   className={NATIVE_SELECT_CLASS}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 >
@@ -594,7 +583,6 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   rows={5}
-                  required
                   aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
                   aria-invalid={!!getFieldError(field)}
                 />
@@ -603,6 +591,22 @@ export function QuestionnaireForm() {
           </form.Field>
         </CardContent>
       </Card>
+
+      {/* Validation error banner — shown when form-level errors exist after a submit attempt */}
+      <form.Subscribe selector={(state) => state.errors}>
+        {(errors) => {
+          if (!errors.length) return null;
+          return (
+            <div
+              role="alert"
+              className="flex items-start gap-3 rounded-xl border border-destructive/40 bg-destructive/5 p-4 text-sm text-destructive"
+            >
+              <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+              <p>Certains champs sont invalides. Vérifie les champs surlignés en rouge ci-dessus.</p>
+            </div>
+          );
+        }}
+      </form.Subscribe>
 
       {/* Consent + submit */}
       <div className="flex flex-col gap-5">
