@@ -31,7 +31,7 @@ export function SiteFooter() {
               className="self-start transition-opacity hover:opacity-80"
             >
               <Image
-                src={`${env.NEXT_PUBLIC_BASE_PATH}/images/default/logo.png`}
+                src={`${env.NEXT_PUBLIC_BASE_PATH}/images/default/logo.webp`}
                 alt={BUSINESS.name}
                 width={600}
                 height={471}

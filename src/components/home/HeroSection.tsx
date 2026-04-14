@@ -78,7 +78,7 @@ export function HeroSection({
             {heroImage ? (
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl">
                 <Image
-                  src={`${env.NEXT_PUBLIC_BASE_PATH}${heroImage}`}
+                  src={`${env.NEXT_PUBLIC_BASE_PATH}${heroImage.replace(/\.(jpe?g|png)$/i, '.webp')}`}
                   alt="Photo du coach Gabriel Lavigueur"
                   fill
                   className="object-cover"

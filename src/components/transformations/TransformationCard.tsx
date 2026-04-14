@@ -21,18 +21,30 @@ export function TransformationCard({ transformation }: TransformationCardProps) 
     >
       <Card className="h-full overflow-hidden border-border/70 transition-all group-hover:border-primary/40 group-hover:shadow-md">
         <div className="grid grid-cols-2">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`${env.NEXT_PUBLIC_BASE_PATH}${transformation.before_image}`}
-            alt={`Avant — ${transformation.client_name}`}
-            className="aspect-[4/5] w-full bg-muted object-cover"
-          />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`${env.NEXT_PUBLIC_BASE_PATH}${transformation.after_image}`}
-            alt={`Après — ${transformation.client_name}`}
-            className="aspect-[4/5] w-full bg-muted object-cover"
-          />
+          <picture>
+            <source
+              srcSet={`${env.NEXT_PUBLIC_BASE_PATH}${transformation.before_image.replace(/\.(jpe?g|png)$/i, '.webp')}`}
+              type="image/webp"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${env.NEXT_PUBLIC_BASE_PATH}${transformation.before_image}`}
+              alt={`Avant — ${transformation.client_name}`}
+              className="aspect-[4/5] w-full bg-muted object-cover"
+            />
+          </picture>
+          <picture>
+            <source
+              srcSet={`${env.NEXT_PUBLIC_BASE_PATH}${transformation.after_image.replace(/\.(jpe?g|png)$/i, '.webp')}`}
+              type="image/webp"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${env.NEXT_PUBLIC_BASE_PATH}${transformation.after_image}`}
+              alt={`Après — ${transformation.client_name}`}
+              className="aspect-[4/5] w-full bg-muted object-cover"
+            />
+          </picture>
         </div>
         <CardContent className="flex flex-col gap-3 p-5">
           <div className="flex items-center justify-between gap-2">
