@@ -17,15 +17,14 @@ export function buildLocalBusinessSchema() {
       width: 600,
       height: 471,
     },
-    // TODO: replace "TODO" values in business-data.ts with real address/phone before going live
-    ...(BUSINESS.contact.phone !== "TODO" && { telephone: BUSINESS.contact.phone }),
+    telephone: BUSINESS.contact.phone,
     email: BUSINESS.contact.email,
     address: {
       "@type": "PostalAddress",
-      ...(BUSINESS.location.streetAddress !== "TODO" && { streetAddress: BUSINESS.location.streetAddress }),
+      streetAddress: BUSINESS.location.streetAddress,
       addressLocality: BUSINESS.location.city,
       addressRegion: BUSINESS.location.province,
-      ...(BUSINESS.location.postalCode !== "TODO" && { postalCode: BUSINESS.location.postalCode }),
+      postalCode: BUSINESS.location.postalCode,
       addressCountry: BUSINESS.location.country,
     },
     geo: {

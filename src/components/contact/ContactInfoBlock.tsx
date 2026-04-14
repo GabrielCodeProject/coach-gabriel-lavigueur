@@ -31,8 +31,7 @@ export function ContactInfoBlock() {
             </a>
           </div>
         </li>
-        {BUSINESS.contact.phone !== "TODO" ? (
-          <li className="flex items-start gap-3">
+        <li className="flex items-start gap-3">
             <Phone className="mt-0.5 size-5 text-primary" aria-hidden="true" />
             <div className="flex flex-col gap-1">
               <p className="font-semibold text-foreground">Téléphone</p>
@@ -44,7 +43,6 @@ export function ContactInfoBlock() {
               </a>
             </div>
           </li>
-        ) : null}
         <li className="flex items-start gap-3">
           <Clock className="mt-0.5 size-5 text-primary" aria-hidden="true" />
           <div className="flex flex-col gap-1">

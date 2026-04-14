@@ -83,8 +83,7 @@ export function SiteFooter() {
                   {BUSINESS.contact.email}
                 </a>
               </li>
-              {BUSINESS.contact.phone !== "TODO" ? (
-                <li className="flex items-center gap-2">
+              <li className="flex items-center gap-2">
                   <Phone className="size-4 shrink-0" aria-hidden="true" />
                   <a
                     href={`tel:${BUSINESS.contact.phone}`}
@@ -93,7 +92,6 @@ export function SiteFooter() {
                     {BUSINESS.contact.phone}
                   </a>
                 </li>
-              ) : null}
               {BUSINESS.socials.some((s) => s.enabled) ? (
                 <li className="flex items-center gap-3 pt-1">
                   {BUSINESS.socials.map((social) => {

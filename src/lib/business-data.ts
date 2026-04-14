@@ -20,23 +20,18 @@ export const BUSINESS = {
     provinceFull: "Québec",
     country: "CA",
     countryFull: "Canada",
-    // TODO: adresse exacte de la boutique Nutrition Suprême de Sainte-Thérèse
-    streetAddress: "TODO",
-    // TODO: code postal exact
-    postalCode: "TODO",
+    streetAddress: "204 rue Saint-Charles, Suite 105",
+    postalCode: "J7E 2B4",
     coordinates: {
-      // Coordonnées approximatives de Sainte-Thérèse — TODO: affiner avec l'adresse précise du commerce
-      latitude: 45.637,
-      longitude: -73.8495,
+      latitude: 45.6438435,
+      longitude: -73.8592858,
     },
-    // TODO: src de l'iframe Google Maps (obtenir via partage → intégrer une carte sur google.com/maps)
-    googleMapsEmbedSrc: "TODO",
+    googleMapsEmbedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3236.0725595105505!2d-73.86168392344585!3d45.64395322142687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc928653f499d97%3A0x38c7959dd0c245a8!2s204%20Rue%20St-Charles%20App%20105%2C%20Sainte-Th%C3%A9r%C3%A8se%2C%20QC%20J7E%202B4!5e1!3m2!1sfr!2sca!4v1776184643779!5m2!1sfr!2sca",
   },
 
   contact: {
     email: "gabrielprivermsg@gmail.com",
-    // TODO: numéro de téléphone de la boutique Nutrition Suprême
-    phone: "TODO",
+    phone: "+1-450-434-0882",
     website: "https://coachgab.nutrition-supreme.com",
   },
 
