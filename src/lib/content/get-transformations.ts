@@ -14,8 +14,8 @@ export const getTransformations = cache((): Transformation[] => {
     );
     return { ...frontmatter, slug, body };
   });
-  // published_date format is guaranteed YYYY-MM-DD by the schema regex —
-  // no manual isNaN guard needed here.
+  // published_date is validated as a YYYY-MM-DD calendar date by the schema —
+  // the regex + refine() in transformation.schema.ts guarantees new Date() is valid.
   return transformations.sort(
     (a, b) =>
       new Date(b.published_date).getTime() -

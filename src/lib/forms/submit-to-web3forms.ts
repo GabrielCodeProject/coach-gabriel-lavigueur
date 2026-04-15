@@ -8,41 +8,68 @@ export type Web3FormsResult =
   | { success: false; message: string };
 
 const FETCH_TIMEOUT_MS = 15_000;
-const RATE_LIMIT_KEY = "w3f_rl";
+const RATE_LIMIT_KEY = "w3f_rate_limit";
 const RATE_LIMIT_MAX = 3;
 const RATE_LIMIT_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 type RateLimitRecord = { count: number; windowStart: number };
 
-function checkRateLimit(): { allowed: boolean } {
+// Reads and validates the rate-limit record from localStorage.
+// Returns a fresh record if the stored value is absent or malformed.
+function readRateLimitRecord(now: number): RateLimitRecord {
   try {
     const raw = localStorage.getItem(RATE_LIMIT_KEY);
-    const now = Date.now();
-    const record: RateLimitRecord = raw
-      ? (JSON.parse(raw) as RateLimitRecord)
-      : { count: 0, windowStart: now };
+    if (!raw) return { count: 0, windowStart: now };
+    const parsed: unknown = JSON.parse(raw);
+    if (
+      parsed === null ||
+      typeof parsed !== "object" ||
+      typeof (parsed as Record<string, unknown>).count !== "number" ||
+      typeof (parsed as Record<string, unknown>).windowStart !== "number"
+    ) {
+      return { count: 0, windowStart: now };
+    }
+    return parsed as RateLimitRecord;
+  } catch {
+    return { count: 0, windowStart: now };
+  }
+}
 
-    if (now - record.windowStart > RATE_LIMIT_WINDOW_MS) {
-      // Window expired — reset
-      localStorage.setItem(
-        RATE_LIMIT_KEY,
-        JSON.stringify({ count: 1, windowStart: now }),
-      );
+// Pure read — does NOT write to localStorage. Checks whether a submission is
+// allowed without consuming a slot.
+// NOTE: this is UX-only client-side throttling. A determined actor can bypass
+// it by clearing localStorage. True abuse prevention requires enabling Web3Forms'
+// server-side spam filter and domain restriction in the Web3Forms dashboard.
+function checkRateLimit(): { allowed: boolean } {
+  try {
+    const now = Date.now();
+    const record = readRateLimitRecord(now);
+    // Reset expired windows and reject future-dated windowStart (tampered storage)
+    if (now - record.windowStart > RATE_LIMIT_WINDOW_MS || record.windowStart > now) {
       return { allowed: true };
     }
-
-    if (record.count >= RATE_LIMIT_MAX) {
-      return { allowed: false };
-    }
-
-    localStorage.setItem(
-      RATE_LIMIT_KEY,
-      JSON.stringify({ count: record.count + 1, windowStart: record.windowStart }),
-    );
-    return { allowed: true };
+    return { allowed: record.count < RATE_LIMIT_MAX };
   } catch {
-    // localStorage unavailable (private browsing, etc.) — allow the request
     return { allowed: true };
+  }
+}
+
+// Write-only — called after a confirmed HTTP success to consume one slot.
+// Separated from checkRateLimit() so network failures do not burn a slot.
+function commitRateLimitSlot(): void {
+  try {
+    const now = Date.now();
+    const record = readRateLimitRecord(now);
+    if (now - record.windowStart > RATE_LIMIT_WINDOW_MS || record.windowStart > now) {
+      localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify({ count: 1, windowStart: now }));
+    } else {
+      localStorage.setItem(
+        RATE_LIMIT_KEY,
+        JSON.stringify({ count: record.count + 1, windowStart: record.windowStart }),
+      );
+    }
+  } catch {
+    // localStorage unavailable — no-op
   }
 }
 
@@ -56,6 +83,8 @@ export async function submitToWeb3Forms(
     };
   }
 
+  // checkRateLimit() is read-only — no slot is consumed until the HTTP request
+  // succeeds below.
   const rateLimit = checkRateLimit();
   if (!rateLimit.allowed) {
     return {
@@ -96,6 +125,11 @@ export async function submitToWeb3Forms(
         message: "L'envoi a échoué. Essaie à nouveau dans un instant.",
       };
     }
+
+    // HTTP success confirmed — consume one rate-limit slot now.
+    // Network failures above do NOT reach this line, so failed attempts
+    // never penalise the user's daily quota.
+    commitRateLimitSlot();
 
     let data: unknown;
     try {

@@ -44,10 +44,11 @@ export const transformationFrontmatterSchema = z.object({
   waist_delta_cm: z.number().optional(),
   short_testimonial: z.string().min(1),
   long_story: z.string().optional(),
-  // Regex replaces the manual new Date().getTime() check in get-transformations.ts
+  // Validates YYYY-MM-DD format AND calendar validity (e.g. 2024-13-45 is rejected)
   published_date: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD format"),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD format")
+    .refine((val) => !isNaN(new Date(val).getTime()), "Invalid calendar date"),
   featured: z.boolean(),
 });
 

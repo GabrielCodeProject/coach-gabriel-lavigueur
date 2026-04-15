@@ -8,6 +8,7 @@ import { StructuredData } from "@/components/shared/StructuredData";
 import { buildRootMetadata } from "@/lib/seo/build-metadata";
 import { buildLocalBusinessSchema } from "@/lib/schema/local-business";
 import { buildWebsiteSchema } from "@/lib/schema/website";
+import { env } from "@/lib/env";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,7 +30,7 @@ export default function RootLayout({
         <script
           defer
           src="https://cloud.umami.is/script.js"
-          data-website-id="4479bc09-0439-43f5-8c09-fd61050abab1"
+          data-website-id={env.NEXT_PUBLIC_UMAMI_SITE_ID}
         />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground antialiased">

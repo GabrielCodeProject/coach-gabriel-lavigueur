@@ -31,6 +31,9 @@ import {
   PLAGE_HORAIRE_LABEL,
   JOUR_SEMAINE_LABEL,
 } from "@/types/questionnaire.types";
+import { getFieldError } from "./get-field-error";
+import { FieldWrapper } from "./FieldWrapper";
+import { CheckboxGroupField } from "./CheckboxGroupField";
 
 const NATIVE_SELECT_CLASS =
   "h-10 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm text-foreground transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm";
@@ -583,7 +586,7 @@ export function QuestionnaireForm() {
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   rows={5}
-                  aria-describedby={getFieldError(field) ? `${field.name}-error` : undefined}
+                  aria-describedby={`${field.name}-hint${getFieldError(field) ? ` ${field.name}-error` : ""}`}
                   aria-invalid={!!getFieldError(field)}
                 />
               </FieldWrapper>
@@ -670,102 +673,3 @@ export function QuestionnaireForm() {
   );
 }
 
-type CheckboxGroupFieldProps = {
-  legend: string;
-  optional?: boolean;
-  idPrefix: string;
-  options: Record<string, string>;
-  value: string[];
-  onChange: (checked: boolean, value: string) => void;
-};
-
-function CheckboxGroupField({
-  legend,
-  optional,
-  idPrefix,
-  options,
-  value,
-  onChange,
-}: CheckboxGroupFieldProps) {
-  return (
-    <fieldset className="flex flex-col gap-3">
-      <legend className="text-sm font-medium">
-        {legend}{" "}
-        {optional ? (
-          <span className="text-xs font-normal text-muted-foreground">(facultatif)</span>
-        ) : null}
-      </legend>
-      <div className="flex flex-col gap-2">
-        {Object.entries(options).map(([optValue, label]) => (
-          <div key={optValue} className="flex items-center gap-2">
-            <Checkbox
-              id={`${idPrefix}-${optValue}`}
-              checked={value.includes(optValue)}
-              onCheckedChange={(checked) => onChange(checked === true, optValue)}
-            />
-            <Label htmlFor={`${idPrefix}-${optValue}`} className="text-sm font-normal">
-              {label}
-            </Label>
-          </div>
-        ))}
-      </div>
-    </fieldset>
-  );
-}
-
-type FieldWrapperProps = {
-  id: string;
-  label: string;
-  required?: boolean;
-  error?: string | undefined;
-  helper?: string;
-  className?: string;
-  children: React.ReactNode;
-};
-
-function FieldWrapper({
-  id,
-  label,
-  required,
-  error,
-  helper,
-  className,
-  children,
-}: FieldWrapperProps) {
-  return (
-    <div className={cn("flex flex-col gap-2", className)}>
-      <Label htmlFor={id}>
-        <span>
-          {label}
-          {required ? (
-            <span aria-hidden="true" className="text-primary">
-              {" *"}
-            </span>
-          ) : null}
-        </span>
-      </Label>
-      {children}
-      {helper ? <p className="text-xs text-muted-foreground">{helper}</p> : null}
-      {error ? (
-        <p id={`${id}-error`} className="text-xs text-destructive" role="alert">
-          {error}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
-type FieldApi = {
-  state: { meta: { errors: unknown[] } };
-};
-
-function getFieldError(field: FieldApi): string | undefined {
-  const firstError = field.state.meta.errors[0];
-  if (!firstError) return undefined;
-  if (typeof firstError === "string") return firstError;
-  if (typeof firstError === "object" && firstError !== null && "message" in firstError) {
-    const message = (firstError as { message: unknown }).message;
-    if (typeof message === "string") return message;
-  }
-  return "Ce champ est invalide";
-}
