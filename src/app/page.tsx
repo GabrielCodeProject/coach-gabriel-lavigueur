@@ -5,12 +5,14 @@ import { buildMetadata } from "@/lib/seo/build-metadata";
 import { ROUTES } from "@/lib/routes";
 import { homePageSchema } from "@/lib/schemas/page.schema";
 import { HeroSection } from "@/components/home/HeroSection";
+import { StatBar } from "@/components/home/StatBar";
 import { FitlogHighlightSection } from "@/components/home/FitlogHighlightSection";
 import { ServiceTeaser } from "@/components/home/ServiceTeaser";
 import { MethodPreviewSection } from "@/components/home/MethodPreviewSection";
 import { PhilosophyQuote } from "@/components/home/PhilosophyQuote";
 import { TransformationsPreviewSection } from "@/components/home/TransformationsPreviewSection";
 import { CtaQuestionnaireBanner } from "@/components/home/CtaQuestionnaireBanner";
+import { SectionDivider } from "@/components/shared/SectionDivider";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter } = getPage("accueil", homePageSchema);
@@ -36,10 +38,16 @@ export default function HomePage() {
         ctaLabel={frontmatter.hero_cta_label}
         heroImage={frontmatter.hero_image}
       />
-      <FitlogHighlightSection />
+      <StatBar />
+      <SectionDivider />
       <ServiceTeaser />
+      <SectionDivider />
       <MethodPreviewSection />
+      <SectionDivider />
+      <FitlogHighlightSection />
+      <SectionDivider />
       <PhilosophyQuote />
+      <SectionDivider />
       <TransformationsPreviewSection
         transformations={featuredTransformations}
       />
