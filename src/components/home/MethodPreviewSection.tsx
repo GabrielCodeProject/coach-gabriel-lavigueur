@@ -3,11 +3,11 @@ import { ArrowRight } from "lucide-react";
 import { ROUTES } from "@/lib/routes";
 
 const STEPS = [
-  { num: "01", title: "Tu remplis le questionnaire", body: "Ton contexte, tes objectifs, tes contraintes. En ligne, avant la rencontre." },
-  { num: "02", title: "On se rencontre en personne", body: "Une heure au Nutrition Suprême. Pas un Zoom — une vraie rencontre." },
-  { num: "03", title: "Je construis ton plan", body: "Environ une semaine de travail sur mesure. Pas un copier-coller." },
-  { num: "04", title: "Livraison via Fitlog", body: "Ton programme et accès direct à moi par chat. Tout au même endroit." },
-  { num: "05", title: "Suivi aux 4–8 semaines", body: "On ajuste selon tes données et ta progression. Le plan évolue avec toi." },
+  { title: "Tu remplis le questionnaire", body: "Ton contexte, tes objectifs, tes contraintes. En ligne, avant la rencontre." },
+  { title: "On se rencontre en personne", body: "Une heure au Nutrition Suprême. Pas un Zoom — une vraie rencontre." },
+  { title: "Je construis ton plan", body: "Environ une semaine de travail sur mesure. Pas un copier-coller." },
+  { title: "Livraison via Fitlog", body: "Ton programme et accès direct à moi par chat. Tout au même endroit." },
+  { title: "Suivi aux 4–8 semaines", body: "On ajuste selon tes données et ta progression. Le plan évolue avec toi." },
 ] as const;
 
 export function MethodPreviewSection() {
@@ -22,22 +22,25 @@ export function MethodPreviewSection() {
         </h2>
 
         <ol className="stagger-grid grid grid-cols-1 gap-px bg-white/8 sm:grid-cols-2 lg:grid-cols-5">
-          {STEPS.map((step) => (
-            <li
-              key={step.num}
-              className="reveal flex flex-col gap-4 bg-[--dark-mid] p-7 transition-colors hover:bg-[#1e341e]"
-            >
-              <span className="text-[44px] font-black leading-none tracking-[-0.04em] text-primary">
-                {step.num}
-              </span>
-              <h3 className="text-[13px] font-bold leading-[1.4] text-white">
-                {step.title}
-              </h3>
-              <p className="text-[12px] leading-[1.6] text-white/65">
-                {step.body}
-              </p>
-            </li>
-          ))}
+          {STEPS.map((step, index) => {
+            const num = String(index + 1).padStart(2, "0");
+            return (
+              <li
+                key={step.title}
+                className="reveal flex flex-col gap-4 bg-[--dark-mid] p-7 transition-colors hover:bg-[#1e341e]"
+              >
+                <span className="text-[44px] font-black leading-none tracking-[-0.04em] text-primary">
+                  {num}
+                </span>
+                <h3 className="text-[13px] font-bold leading-[1.4] text-white">
+                  {step.title}
+                </h3>
+                <p className="text-[12px] leading-[1.6] text-white/65">
+                  {step.body}
+                </p>
+              </li>
+            );
+          })}
         </ol>
 
         <div className="mt-8">

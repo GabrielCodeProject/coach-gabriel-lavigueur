@@ -1,35 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ROUTES } from "@/lib/routes";
+import type { Service } from "@/lib/schemas/service.schema";
 
-const SERVICES = [
-  {
-    num: "01",
-    title: "Consultation initiale",
-    description:
-      "On établit ton point de départ ensemble. Une heure, en personne, au Nutrition Suprême. Pas un formulaire — une vraie rencontre.",
-  },
-  {
-    num: "02",
-    title: "Plan d'entraînement",
-    description:
-      "Structuré pour ta réalité, pas un template. Livré via Fitlog, ajusté aux 4–8 semaines selon ta progression réelle.",
-  },
-  {
-    num: "03",
-    title: "Plan nutritionnel",
-    description:
-      "Un plan construit une fois, mis à jour gratuitement à vie. Jamais de double facturation pour ce qui a déjà été fait.",
-  },
-  {
-    num: "04",
-    title: "Suivi mensuel",
-    description:
-      "Tu n'es jamais seul entre les étapes. On ajuste ensemble selon tes données et ta progression réelle.",
-  },
-] as const;
+type ServiceTeaserProps = {
+  services: readonly Service[];
+};
 
-export function ServiceTeaser() {
+export function ServiceTeaser({ services }: ServiceTeaserProps) {
   return (
     <section className="bg-background py-20 md:py-24">
       <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
@@ -41,33 +19,42 @@ export function ServiceTeaser() {
         </h2>
 
         <div className="stagger-grid grid grid-cols-1 gap-px bg-border sm:grid-cols-2">
-          {SERVICES.map((svc) => (
-            <article
-              key={svc.num}
-              className="reveal group relative overflow-hidden bg-background p-8 transition-colors hover:bg-[--off-white]"
-            >
-              {/* Barre lime gauche au hover */}
-              <span
-                className="absolute inset-y-0 left-0 w-[3px] origin-bottom scale-y-0 bg-primary transition-transform duration-[250ms] group-hover:scale-y-100"
-                aria-hidden="true"
-              />
-              <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
-                {svc.num}
-              </p>
-              <h3 className="mb-3 text-[20px] font-extrabold tracking-[-0.02em] text-foreground">
-                {svc.title}
-              </h3>
-              <p className="text-[15px] leading-[1.65] text-foreground/75">
-                {svc.description}
-              </p>
-              <Link
-                href={ROUTES.SERVICES}
-                className="mt-5 inline-flex items-center gap-1.5 border-b border-foreground/25 pb-0.5 text-[11px] font-bold uppercase tracking-[0.1em] text-foreground transition-colors hover:border-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+          {services.map((service, index) => {
+            const num = String(index + 1).padStart(2, "0");
+            const headingId = `svc-${num}`;
+            return (
+              <article
+                key={service.slug}
+                aria-labelledby={headingId}
+                className="reveal group relative overflow-hidden bg-background p-8 transition-colors hover:bg-[--off-white]"
               >
-                Voir les détails
-              </Link>
-            </article>
-          ))}
+                {/* Barre lime gauche au hover */}
+                <span
+                  className="absolute inset-y-0 left-0 w-[3px] origin-bottom scale-y-0 bg-primary transition-transform duration-[250ms] group-hover:scale-y-100"
+                  aria-hidden="true"
+                />
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+                  {num}
+                </p>
+                <h3
+                  id={headingId}
+                  className="mb-3 text-[20px] font-extrabold tracking-[-0.02em] text-foreground"
+                >
+                  {service.name}
+                </h3>
+                <p className="text-[15px] leading-[1.65] text-foreground/75">
+                  {service.short_description}
+                </p>
+                <Link
+                  href={ROUTES.SERVICES}
+                  className="mt-5 inline-flex items-center gap-1.5 border-b border-foreground/25 pb-0.5 text-[11px] font-bold uppercase tracking-[0.1em] text-foreground transition-colors hover:border-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+                >
+                  <span className="sr-only">{service.name} — </span>
+                  Voir les détails
+                </Link>
+              </article>
+            );
+          })}
         </div>
 
         <div className="mt-8 flex justify-center">

@@ -27,7 +27,12 @@ const FEATURES: readonly Feature[] = [
   },
 ];
 
-export function FitlogHighlightSection() {
+type FitlogHighlightSectionProps = {
+  title?: string;
+  body?: string;
+};
+
+export function FitlogHighlightSection({ title, body }: FitlogHighlightSectionProps) {
   return (
     <section className="bg-background py-20 md:py-24">
       <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
@@ -35,10 +40,19 @@ export function FitlogHighlightSection() {
           Via Fitlog
         </p>
         <h2 className="reveal mb-12 text-[clamp(32px,4vw,52px)] font-black uppercase leading-[0.93] tracking-[-0.05em] text-foreground">
-          Ton coaching
-          <br />
-          dans ta poche.
+          {title ?? (
+            <>
+              Ton coaching
+              <br />
+              dans ta poche.
+            </>
+          )}
         </h2>
+        {body && (
+          <p className="reveal -mt-8 mb-12 text-[16px] leading-[1.65] text-foreground/70">
+            {body}
+          </p>
+        )}
 
         <div className="stagger-grid grid grid-cols-1 gap-px bg-border sm:grid-cols-3">
           {FEATURES.map((feature) => {

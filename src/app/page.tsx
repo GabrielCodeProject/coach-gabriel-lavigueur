@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getPage } from "@/lib/content/get-page";
 import { getFeaturedTransformations } from "@/lib/content/get-transformations";
+import { getServices } from "@/lib/content/get-services";
 import { buildMetadata } from "@/lib/seo/build-metadata";
 import { ROUTES } from "@/lib/routes";
 import { homePageSchema } from "@/lib/schemas/page.schema";
@@ -27,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function HomePage() {
   const { frontmatter } = getPage("accueil", homePageSchema);
   const featuredTransformations = getFeaturedTransformations();
+  const services = getServices();
 
   return (
     <>
@@ -40,11 +42,14 @@ export default function HomePage() {
       />
       <StatBar />
       <SectionDivider />
-      <ServiceTeaser />
+      <ServiceTeaser services={services} />
       <SectionDivider />
       <MethodPreviewSection />
       <SectionDivider />
-      <FitlogHighlightSection />
+      <FitlogHighlightSection
+        title={frontmatter.fitlog_highlight_title}
+        body={frontmatter.fitlog_highlight_body}
+      />
       <SectionDivider />
       <PhilosophyQuote />
       <SectionDivider />
