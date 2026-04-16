@@ -1,42 +1,36 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/routes";
 import { BUSINESS } from "@/lib/business-data";
 
 type CtaQuestionnaireBannerProps = {
   title?: string;
-  body?: string;
   ctaLabel?: string;
 };
 
 export function CtaQuestionnaireBanner({
-  title = "Ton point de départ existe déjà",
-  body = "Tu n'as pas besoin d'être prêt — juste honnête sur où tu en es.",
+  title = "Bâtis quelque chose qui dure.",
   ctaLabel = BUSINESS.cta.primary,
 }: CtaQuestionnaireBannerProps) {
   return (
-    <section className="bg-background">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-20">
-        <div className="flex flex-col items-start gap-6 rounded-2xl border border-border bg-primary/5 p-8 md:flex-row md:items-center md:justify-between md:p-12">
-          <div className="flex max-w-2xl flex-col gap-3">
-            <h2 className="text-balance text-2xl font-semibold tracking-tight md:text-3xl">
+    <section className="bg-primary py-20 md:py-24">
+      <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="reveal mb-3 text-[11px] font-bold uppercase tracking-[0.25em] text-foreground/50">
+              Prêt à commencer?
+            </p>
+            <h2 className="reveal-left text-[clamp(28px,4vw,50px)] font-black uppercase leading-[0.93] tracking-[-0.04em] text-foreground">
               {title}
             </h2>
-            <p className="text-pretty leading-relaxed text-muted-foreground">
-              {body}
-            </p>
           </div>
+
           <Link
             href={ROUTES.CONTACT}
-            className={cn(
-              buttonVariants({ variant: "default" }),
-              "h-12 shrink-0 px-6 text-base",
-            )}
+            className="reveal inline-flex h-14 shrink-0 items-center gap-2 rounded-[4px] bg-[--dark] px-8 text-[11px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
           >
             {ctaLabel}
-            <ArrowRight className="ml-2 size-4" aria-hidden="true" />
+            <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </div>
       </div>

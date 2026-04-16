@@ -89,7 +89,6 @@ export default function TransformationsPage() {
 
       <CtaQuestionnaireBanner
         title="Leur point de départ ressemblait peut-être au tien"
-        body="La seule différence, c'est qu'ils ont envoyé le premier message."
       />
     </>
   );

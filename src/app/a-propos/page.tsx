@@ -38,10 +38,7 @@ export default function AboutPage() {
           <MarkdownBody>{body}</MarkdownBody>
         </div>
       </section>
-      <CtaQuestionnaireBanner
-        title="Tu sais qui je suis"
-        body="Maintenant dis-moi qui tu es et où tu veux aller."
-      />
+      <CtaQuestionnaireBanner title="Tu sais qui je suis" />
     </>
   );
 }
