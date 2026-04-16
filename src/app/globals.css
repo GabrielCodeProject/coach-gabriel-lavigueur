@@ -5,50 +5,40 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Backgrounds */
-  --background:  #ffffff;
-  --foreground:  #0c1a0c;
-  --card:        #f7faf3;
-  --card-foreground: #0c1a0c;
-  --popover:     #ffffff;
-  --popover-foreground: #0c1a0c;
-
-  /* Brand — Lime électrique */
-  --primary:         #84cc16;
-  --primary-foreground: #0c1a0c;
-
-  /* Secondary / muted */
-  --secondary:        #f0f7e8;
-  --secondary-foreground: #0c1a0c;
-  --muted:            #f0f7e8;
-  --muted-foreground: rgba(12,26,12,0.55);
-
-  /* Accent */
-  --accent:           #f0f7e8;
-  --accent-foreground: #0c1a0c;
-
-  /* States */
-  --destructive: oklch(0.57 0.22 27);
-  --border:      rgba(12,26,12,0.09);
-  --input:       rgba(12,26,12,0.09);
-  --ring:        #84cc16;
-
-  /* Radius */
-  --radius: 0.25rem;
-
-  /* Custom design tokens */
+  /* Custom design tokens — source of truth */
   --dark:       #0c1a0c;
   --dark-mid:   #162616;
   --off-white:  #f7faf3;
   --cream:      #f0f7e8;
   --lime:       #84cc16;
   --lime-dark:  #5fa800;
-  --ink:        #0c1a0c;
+  --ink:        #0c1a0c;   /* same value as --dark — semantic alias */
   --ink-75:     rgba(12,26,12,0.75);
-  --ink-45:     rgba(12,26,12,0.40);
+  --ink-45:     rgba(12,26,12,0.40);  /* named for historical design token, value is 40% */
   --white-65:   rgba(255,255,255,0.65);
   --white-30:   rgba(255,255,255,0.30);
-  --white-10:   rgba(255,255,255,0.08);
+  --white-10:   rgba(255,255,255,0.08);  /* named for historical design token, value is 8% */
+
+  /* shadcn/UI required tokens — reference the custom tokens above */
+  --background:  #ffffff;
+  --foreground:  var(--dark);
+  --card:        var(--off-white);
+  --card-foreground: var(--dark);
+  --popover:     #ffffff;
+  --popover-foreground: var(--dark);
+  --primary:     var(--lime);
+  --primary-foreground: var(--dark);
+  --secondary:   var(--cream);
+  --secondary-foreground: var(--dark);
+  --muted:       var(--cream);
+  --muted-foreground: rgba(12,26,12,0.55);
+  --accent:      var(--cream);
+  --accent-foreground: var(--dark);
+  --destructive: oklch(0.57 0.22 27);
+  --border:      rgba(12,26,12,0.09);
+  --input:       rgba(12,26,12,0.09);
+  --ring:        var(--lime);
+  --radius: 0.25rem;
 }
 
 @theme inline {
@@ -96,6 +86,13 @@
   --border:      rgba(255,255,255,0.08);
   --input:       rgba(255,255,255,0.08);
   --ring:        #84cc16;
+
+  /* Custom tokens — dark mode overrides */
+  --off-white:  #1e341e;
+  --cream:      #162616;
+  --lime-dark:  #a3e635;
+  --ink-75:     rgba(247,250,243,0.75);
+  --ink-45:     rgba(247,250,243,0.40);
 }
 
 @layer base {
@@ -162,3 +159,20 @@
 .hero-anim-3 { animation: hero-fade-up 0.6s cubic-bezier(0.22,1,0.36,1) 0.40s both; }
 .hero-anim-4 { animation: hero-fade-up 0.6s cubic-bezier(0.22,1,0.36,1) 0.55s both; }
 .hero-anim-5 { animation: hero-fade-up 0.6s cubic-bezier(0.22,1,0.36,1) 0.70s both; }
+
+/* Accessibility — respect OS reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-left,
+  .reveal-divider {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  [class^="hero-anim-"] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
