@@ -31,16 +31,7 @@ export function HeroSection({
         </p>
 
         <h1 className="hero-anim-2 mb-7 text-[clamp(56px,7vw,88px)] font-black uppercase leading-[0.88] tracking-[-0.04em] text-foreground">
-          {title.split(" ").map((word, i, arr) => {
-            if (i === arr.length - 1) {
-              return (
-                <span key={i} className="text-[--lime-dark]">
-                  {word}
-                </span>
-              );
-            }
-            return word + " ";
-          })}
+          {title}
         </h1>
 
         <p className="hero-anim-3 mb-3 max-w-[480px] text-[18px] font-medium leading-[1.65] text-foreground">
@@ -51,11 +42,9 @@ export function HeroSection({
           <p className="hero-anim-3 mb-8 max-w-[480px] text-[15px] leading-[1.7] text-foreground/75">
             {bodyText}
           </p>
-        ) : (
-          <div className="mb-8" />
-        )}
+        ) : null}
 
-        <div className="hero-anim-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="hero-anim-4 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Link
             href={ROUTES.CONTACT}
             className="inline-flex h-12 items-center gap-2 rounded-[4px] bg-[--dark] px-6 text-[11px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
@@ -86,6 +75,7 @@ export function HeroSection({
             src={`${env.NEXT_PUBLIC_BASE_PATH}${heroImage.replace(/\.(jpe?g|png)$/i, ".webp")}`}
             alt={`Photo du coach ${BUSINESS.coach.fullName}`}
             fill
+            sizes="(min-width: 1024px) 380px, 0px"
             className="object-cover object-top"
             priority
           />
