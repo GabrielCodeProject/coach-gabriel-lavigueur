@@ -31,10 +31,7 @@ export default function MethodPage() {
       />
       <MethodSteps steps={frontmatter.steps} />
       <FitlogHighlightSection />
-      <CtaQuestionnaireBanner
-        title="Tu connais comment je travaille"
-        body="La prochaine étape, c'est toi."
-      />
+      <CtaQuestionnaireBanner title="Tu connais comment je travaille" />
     </>
   );
 }

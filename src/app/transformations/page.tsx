@@ -33,10 +33,10 @@ export default function TransformationsPage() {
         <div className="mx-auto w-full max-w-3xl px-4 py-14 md:px-6 md:py-20">
           <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4">
-              <h2 className="text-balance text-2xl font-semibold tracking-tight">
+              <h2 className="text-balance text-2xl font-black uppercase tracking-[-0.04em]">
                 Ce que je veux dire par transformation
               </h2>
-              <p className="text-pretty leading-relaxed text-muted-foreground">
+              <p className="text-pretty leading-relaxed text-foreground/75">
                 Dans l&apos;industrie du fitness, une transformation, c&apos;est souvent une
                 photo avant-après spectaculaire prise en 12 semaines. Ce
                 n&apos;est pas ce que je propose. Ce que je construis avec toi,
@@ -46,10 +46,10 @@ export default function TransformationsPage() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-balance text-2xl font-semibold tracking-tight">
+              <h2 className="text-balance text-2xl font-black uppercase tracking-[-0.04em]">
                 Long terme vs résultats rapides
               </h2>
-              <p className="text-pretty leading-relaxed text-muted-foreground">
+              <p className="text-pretty leading-relaxed text-foreground/75">
                 Les résultats rapides existent — et ils sont réels. Mais ils ne
                 durent que si les habitudes qui les ont produits durent aussi.
                 Mon travail commence après que tu as perdu le premier kilo, pas
@@ -60,10 +60,10 @@ export default function TransformationsPage() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-balance text-2xl font-semibold tracking-tight">
+              <h2 className="text-balance text-2xl font-black uppercase tracking-[-0.04em]">
                 Des attentes réalistes
               </h2>
-              <p className="text-pretty leading-relaxed text-muted-foreground">
+              <p className="text-pretty leading-relaxed text-foreground/75">
                 Je ne te promets pas de perdre 30 livres en 8 semaines. Je te
                 promets un plan honnête, adapté à ta vie réelle, avec un suivi
                 régulier qui ajuste quand quelque chose ne fonctionne pas. Les
@@ -79,7 +79,7 @@ export default function TransformationsPage() {
       {BUSINESS.transformations.enabled && transformations.length > 0 ? (
         <section className="border-t border-border bg-card">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 md:px-6 md:py-20">
-            <h2 className="mb-10 text-balance text-3xl font-semibold tracking-tight md:text-4xl">
+            <h2 className="mb-10 text-balance text-3xl font-black uppercase tracking-[-0.04em] md:text-4xl">
               Des vrais gens, des vrais résultats.
             </h2>
             <TransformationGallery transformations={transformations} />
@@ -89,7 +89,6 @@ export default function TransformationsPage() {
 
       <CtaQuestionnaireBanner
         title="Leur point de départ ressemblait peut-être au tien"
-        body="La seule différence, c'est qu'ils ont envoyé le premier message."
       />
     </>
   );

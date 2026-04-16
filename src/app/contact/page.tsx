@@ -40,18 +40,18 @@ export default function ContactPage() {
             </div>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-3">
-                <h2 className="text-balance text-2xl font-semibold tracking-tight md:text-3xl">
+                <h2 className="text-balance text-2xl font-black uppercase tracking-[-0.04em] md:text-3xl">
                   Le questionnaire
                 </h2>
-                <p className="text-pretty text-sm leading-relaxed text-muted-foreground">
+                <p className="text-pretty text-sm leading-relaxed text-foreground/75">
                   {frontmatter.form_intro}
                 </p>
               </div>
               <QuestionnaireForm />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-foreground/75">
                 {frontmatter.response_time_note}
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground/75">
                 Une question avant de commencer ?{" "}
                 <Link
                   href={ROUTES.FAQ}

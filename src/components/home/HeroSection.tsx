@@ -1,12 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MapPin, ImageIcon } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 import { ROUTES } from "@/lib/routes";
 import { BUSINESS } from "@/lib/business-data";
 import { env } from "@/lib/env";
-import { StatBar } from "@/components/home/StatBar";
 
 type HeroSectionProps = {
   eyebrow: string;
@@ -26,75 +23,68 @@ export function HeroSection({
   heroImage,
 }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-background">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-24 lg:py-32">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-          {/* Text column */}
-          <div className="flex flex-col gap-6">
-            <span className="inline-flex items-center gap-2 self-start rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-              <MapPin className="size-3.5" aria-hidden="true" />
-              {eyebrow}
-            </span>
-            <h1 className="max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-6xl">
-              {title}
-            </h1>
-            <p className="max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              {subtitle}
-            </p>
-            {bodyText ? (
-              <p className="hidden max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground md:block">
-                {bodyText}
-              </p>
-            ) : null}
-            <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
-              <Link
-                href={ROUTES.CONTACT}
-                className={cn(
-                  buttonVariants({ variant: "default" }),
-                  "h-12 px-6 text-base",
-                )}
-              >
-                {ctaLabel}
-                <ArrowRight className="ml-2 size-4" aria-hidden="true" />
-              </Link>
-              <Link
-                href={ROUTES.METHOD}
-                className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "h-12 px-6 text-base",
-                )}
-              >
-                Voir ma méthode
-              </Link>
-            </div>
-            <p className="pt-1 text-xs text-muted-foreground">
-              Consultation en personne au {BUSINESS.location.storeName},{" "}
-              {BUSINESS.location.city}. Réponse personnelle sous 48 heures.
-            </p>
-          </div>
+    <section className="grid grid-cols-1 border-b border-border bg-background lg:min-h-[88vh] lg:grid-cols-[1fr_380px]">
+      {/* Colonne texte */}
+      <div className="flex flex-col px-4 py-12 md:px-6 md:py-14 lg:justify-end lg:border-r lg:border-border lg:px-14 lg:py-20">
+        <p className="hero-anim-1 mb-5 text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--lime-dark)]">
+          {eyebrow}
+        </p>
 
-          {/* Hero image — visible on desktop only */}
-          <div className="hidden lg:block">
-            {heroImage ? (
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl">
-                <Image
-                  src={`${env.NEXT_PUBLIC_BASE_PATH}${heroImage.replace(/\.(jpe?g|png)$/i, '.webp')}`}
-                  alt="Photo du coach Gabriel Lavigueur"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            ) : (
-              <div className="flex aspect-[3/4] w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl bg-muted text-muted-foreground">
-                <ImageIcon className="size-8" aria-hidden="true" />
-                <span className="text-xs">Photo — Portrait bureau</span>
-              </div>
-            )}
-          </div>
+        <h1 className="hero-anim-2 mb-7 text-[clamp(40px,7vw,88px)] font-black uppercase leading-[0.88] tracking-[-0.04em] text-foreground">
+          {title}
+        </h1>
+
+        <p className="hero-anim-3 mb-3 max-w-[480px] text-[18px] font-medium leading-[1.65] text-foreground">
+          {subtitle}
+        </p>
+
+        {bodyText ? (
+          <p className="hero-anim-3 mb-8 max-w-[480px] text-[15px] leading-[1.7] text-foreground/75">
+            {bodyText}
+          </p>
+        ) : null}
+
+        <div className="hero-anim-4 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Link
+            href={ROUTES.CONTACT}
+            className="inline-flex h-12 items-center gap-2 rounded-[4px] bg-[var(--dark)] px-6 text-[11px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+          >
+            {ctaLabel}
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
+          <Link
+            href={ROUTES.METHOD}
+            className="text-[11px] font-semibold uppercase tracking-[0.05em] text-foreground/60 underline decoration-foreground/25 underline-offset-4 hover:text-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+          >
+            Voir ma méthode
+          </Link>
         </div>
+
+        <p className="hero-anim-5 mt-5 text-[12px] font-medium text-foreground/60">
+          Consultation en personne · Réponse personnelle sous 48 h
+        </p>
       </div>
-      <StatBar />
+
+      {/* Colonne photo */}
+      <div className="relative hidden overflow-hidden bg-[var(--off-white)] after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-primary lg:block">
+        <span className="absolute left-4 top-4 z-10 rounded-[4px] bg-[var(--dark)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-primary">
+          Certifié AAT
+        </span>
+        {heroImage ? (
+          <Image
+            src={`${env.NEXT_PUBLIC_BASE_PATH}${heroImage.replace(/\.(jpe?g|png)$/i, ".webp")}`}
+            alt={`Photo du coach ${BUSINESS.coach.fullName}`}
+            fill
+            sizes="(min-width: 1024px) 380px, 0px"
+            className="object-cover object-top"
+            priority
+          />
+        ) : (
+          <div className="flex h-full flex-col items-center justify-center gap-3 text-foreground/30">
+            <span className="text-[10px] uppercase tracking-widest">Photo Gabriel</span>
+          </div>
+        )}
+      </div>
     </section>
   );
 }

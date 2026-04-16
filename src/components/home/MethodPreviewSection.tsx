@@ -1,86 +1,55 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/routes";
 
-type MethodPreviewStep = {
-  number: number;
-  title: string;
-  body: string;
-};
-
-const METHOD_PREVIEW_STEPS: readonly MethodPreviewStep[] = [
-  {
-    number: 1,
-    title: "Tu remplis le questionnaire",
-    body: "Ton contexte, tes objectifs, tes contraintes.",
-  },
-  {
-    number: 2,
-    title: "On se rencontre en personne",
-    body: "Une heure au Nutrition Suprême de Sainte-Thérèse.",
-  },
-  {
-    number: 3,
-    title: "Je construis ton plan",
-    body: "Environ une semaine de travail sur mesure.",
-  },
-  {
-    number: 4,
-    title: "Livraison via Fitlog",
-    body: "Ton programme, ton chat avec moi, ton suivi.",
-  },
-  {
-    number: 5,
-    title: "Suivi aux 4 à 8 semaines",
-    body: "On ajuste selon tes données et ta progression.",
-  },
-];
+const STEPS = [
+  { title: "Tu remplis le questionnaire", body: "Ton contexte, tes objectifs, tes contraintes. En ligne, avant la rencontre." },
+  { title: "On se rencontre en personne", body: "Une heure au Nutrition Suprême. Pas un Zoom — une vraie rencontre." },
+  { title: "Je construis ton plan", body: "Environ une semaine de travail sur mesure. Pas un copier-coller." },
+  { title: "Livraison via Fitlog", body: "Ton programme et accès direct à moi par chat. Tout au même endroit." },
+  { title: "Suivi aux 4–8 semaines", body: "On ajuste selon tes données et ta progression. Le plan évolue avec toi." },
+] as const;
 
 export function MethodPreviewSection() {
   return (
-    <section className="border-b border-border bg-background">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-20">
-        <div className="flex flex-col gap-4 md:max-w-2xl">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-            Ma méthode, simplement
-          </span>
-          <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-4xl">
-            Du premier contact au premier résultat.
-          </h2>
-          <p className="text-pretty leading-relaxed text-muted-foreground">
-            Cinq étapes claires, aucune surprise. Chaque client passe par le même processus — c'est ce qui rend mon travail prévisible et le tien efficace.
-          </p>
-        </div>
-        <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-          {METHOD_PREVIEW_STEPS.map((step) => (
-            <li
-              key={step.number}
-              className="flex flex-col gap-3 rounded-xl border border-border bg-card p-5"
-            >
-              <span className="inline-flex size-8 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
-                {step.number}
-              </span>
-              <h3 className="text-sm font-semibold text-foreground">
-                {step.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {step.body}
-              </p>
-            </li>
-          ))}
+    <section className="bg-[var(--dark-mid)] py-20 md:py-24">
+      <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+        <p className="reveal mb-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary">
+          Ma méthode
+        </p>
+        <h2 className="reveal mb-12 text-[clamp(32px,4vw,52px)] font-black uppercase leading-[0.93] tracking-[-0.05em] text-white">
+          Du premier contact<br />au premier résultat.
+        </h2>
+
+        <ol className="stagger-grid grid grid-cols-1 gap-px bg-white/8 sm:grid-cols-2 lg:grid-cols-5">
+          {STEPS.map((step, index) => {
+            const num = String(index + 1).padStart(2, "0");
+            return (
+              <li
+                key={step.title}
+                className="reveal flex flex-col gap-4 bg-[var(--dark-mid)] p-7 transition-colors hover:bg-[#1e341e]"
+              >
+                <span className="text-[44px] font-black leading-none tracking-[-0.04em] text-primary">
+                  {num}
+                </span>
+                <h3 className="text-[13px] font-bold leading-[1.4] text-white">
+                  {step.title}
+                </h3>
+                <p className="text-[12px] leading-[1.6] text-white/65">
+                  {step.body}
+                </p>
+              </li>
+            );
+          })}
         </ol>
+
         <div className="mt-8">
           <Link
             href={ROUTES.METHOD}
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "h-11 px-5 text-sm",
-            )}
+            className="inline-flex h-11 items-center gap-2 rounded-[4px] border border-primary px-5 text-[11px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
           >
             Voir les détails de ma méthode
-            <ArrowRight className="ml-2 size-4" aria-hidden="true" />
+            <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </div>
       </div>

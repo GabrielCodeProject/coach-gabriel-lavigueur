@@ -46,7 +46,6 @@ export default function ServicesPage() {
       />
       <CtaQuestionnaireBanner
         title="Le bon service pour toi est là"
-        body="Choisis ton point d'entrée — on ajuste ensemble."
       />
     </>
   );

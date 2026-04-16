@@ -31,7 +31,6 @@ export default function FaqPage() {
       </section>
       <CtaQuestionnaireBanner
         title="Tu as encore des questions ?"
-        body="Je te réponds personnellement — pas un bot, pas un template."
       />
     </>
   );

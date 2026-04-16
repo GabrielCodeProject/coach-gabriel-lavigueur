@@ -19,7 +19,7 @@ export function TransformationCard({ transformation }: TransformationCardProps) 
       className="group"
       aria-label={`Voir la transformation de ${transformation.client_name} — ${transformation.duration_months} mois`}
     >
-      <Card className="h-full overflow-hidden border-border/70 transition-all group-hover:border-primary/40 group-hover:shadow-md">
+      <Card className="h-full overflow-hidden border border-border bg-background transition-colors group-hover:bg-[var(--off-white)]">
         <div className="grid grid-cols-2">
           <picture>
             <source
@@ -48,17 +48,17 @@ export function TransformationCard({ transformation }: TransformationCardProps) 
         </div>
         <CardContent className="flex flex-col gap-3 p-5">
           <div className="flex items-center justify-between gap-2">
-            <p className="text-sm font-semibold text-foreground">
+            <p className="text-sm font-extrabold text-foreground">
               {transformation.client_name}
             </p>
-            <Badge variant="secondary" className="text-[10px]">
+            <Badge className="bg-primary text-primary-foreground text-[10px]">
               {TRANSFORMATION_GOAL_LABEL[transformation.goal_tag]}
             </Badge>
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-foreground/75">
             {transformation.duration_months} mois
           </p>
-          <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+          <p className="line-clamp-3 text-sm leading-relaxed text-foreground/75">
             « {transformation.short_testimonial} »
           </p>
         </CardContent>

@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { StructuredData } from "@/components/shared/StructuredData";
+import { ScrollRevealInit } from "@/components/shared/ScrollRevealInit";
 import { buildRootMetadata } from "@/lib/seo/build-metadata";
 import { buildLocalBusinessSchema } from "@/lib/schema/local-business";
 import { buildWebsiteSchema } from "@/lib/schema/website";
@@ -44,6 +45,7 @@ export default function RootLayout({
           <SiteHeader />
           <main id="main-content" className="flex flex-1 flex-col">{children}</main>
           <SiteFooter />
+          <ScrollRevealInit />
         </ThemeProvider>
       </body>
     </html>
