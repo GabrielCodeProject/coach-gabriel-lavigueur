@@ -22,7 +22,7 @@ type MethodStepsProps = {
 
 export function MethodSteps({ steps }: MethodStepsProps) {
   return (
-    <section className="bg-[--dark-mid]">
+    <section className="bg-[var(--dark-mid)]">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-20">
         {/* Mobile timeline */}
         <ol className="relative flex flex-col gap-8 lg:hidden">

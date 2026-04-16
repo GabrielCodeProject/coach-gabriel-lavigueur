@@ -23,14 +23,14 @@ export function HeroSection({
   heroImage,
 }: HeroSectionProps) {
   return (
-    <section className="grid min-h-[88vh] border-b border-border bg-background lg:grid-cols-[1fr_380px]">
+    <section className="grid grid-cols-1 border-b border-border bg-background lg:min-h-[88vh] lg:grid-cols-[1fr_380px]">
       {/* Colonne texte */}
-      <div className="flex flex-col justify-end border-r border-border px-4 py-14 md:px-6 md:py-16 lg:px-14 lg:py-20">
-        <p className="hero-anim-1 mb-5 text-[11px] font-bold uppercase tracking-[0.25em] text-[--lime-dark]">
+      <div className="flex flex-col px-4 py-12 md:px-6 md:py-14 lg:justify-end lg:border-r lg:border-border lg:px-14 lg:py-20">
+        <p className="hero-anim-1 mb-5 text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--lime-dark)]">
           {eyebrow}
         </p>
 
-        <h1 className="hero-anim-2 mb-7 text-[clamp(56px,7vw,88px)] font-black uppercase leading-[0.88] tracking-[-0.04em] text-foreground">
+        <h1 className="hero-anim-2 mb-7 text-[clamp(40px,7vw,88px)] font-black uppercase leading-[0.88] tracking-[-0.04em] text-foreground">
           {title}
         </h1>
 
@@ -47,7 +47,7 @@ export function HeroSection({
         <div className="hero-anim-4 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Link
             href={ROUTES.CONTACT}
-            className="inline-flex h-12 items-center gap-2 rounded-[4px] bg-[--dark] px-6 text-[11px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+            className="inline-flex h-12 items-center gap-2 rounded-[4px] bg-[var(--dark)] px-6 text-[11px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
           >
             {ctaLabel}
             <ArrowRight className="size-4" aria-hidden="true" />
@@ -66,8 +66,8 @@ export function HeroSection({
       </div>
 
       {/* Colonne photo */}
-      <div className="relative hidden overflow-hidden bg-[--off-white] after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-primary lg:block">
-        <span className="absolute left-4 top-4 z-10 rounded-[4px] bg-[--dark] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-primary">
+      <div className="relative hidden overflow-hidden bg-[var(--off-white)] after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-primary lg:block">
+        <span className="absolute left-4 top-4 z-10 rounded-[4px] bg-[var(--dark)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-primary">
           Certifié AAT
         </span>
         {heroImage ? (

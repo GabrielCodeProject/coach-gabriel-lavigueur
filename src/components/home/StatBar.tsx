@@ -25,7 +25,7 @@ export function StatBar() {
   return (
     <section
       aria-labelledby="stats-heading"
-      className="grid grid-cols-1 divide-y divide-white/8 bg-[--dark] sm:grid-cols-3 sm:divide-x sm:divide-y-0"
+      className="grid grid-cols-1 divide-y divide-white/8 bg-[var(--dark)] sm:grid-cols-3 sm:divide-x sm:divide-y-0"
     >
       <h2 id="stats-heading" className="sr-only">
         Chiffres clés

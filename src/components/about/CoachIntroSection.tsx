@@ -15,7 +15,7 @@ export function CoachIntroSection({
       <div className="mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-20">
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr]">
           <div className="flex flex-col gap-4">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[--lime-dark]">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--lime-dark)]">
               À propos
             </span>
             <h2 className="text-balance text-3xl font-black uppercase tracking-[-0.04em] md:text-4xl">
@@ -25,7 +25,7 @@ export function CoachIntroSection({
               {introBody}
             </p>
           </div>
-          <aside className="flex flex-col gap-5 border border-border bg-[--off-white] p-6 transition-colors hover:bg-[--cream]">
+          <aside className="flex flex-col gap-5 border border-border bg-[var(--off-white)] p-6 transition-colors hover:bg-[var(--cream)]">
             <div className="flex items-start gap-3">
               <MapPin className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
               <div className="flex flex-col gap-1 text-sm">

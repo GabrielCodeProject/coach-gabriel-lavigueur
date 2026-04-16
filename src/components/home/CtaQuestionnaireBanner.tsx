@@ -27,7 +27,7 @@ export function CtaQuestionnaireBanner({
 
           <Link
             href={ROUTES.CONTACT}
-            className="reveal inline-flex h-14 shrink-0 items-center gap-2 rounded-[4px] bg-[--dark] px-8 text-[11px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+            className="reveal inline-flex h-14 shrink-0 items-center gap-2 rounded-[4px] bg-[var(--dark)] px-8 text-[11px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
           >
             {ctaLabel}
             <ArrowRight className="size-4" aria-hidden="true" />

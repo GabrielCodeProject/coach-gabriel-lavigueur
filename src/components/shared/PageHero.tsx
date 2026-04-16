@@ -9,7 +9,7 @@ export function PageHero({ eyebrow, title, subtitle }: PageHeroProps) {
     <section className="border-b border-border bg-background pb-14 pt-16 md:pb-16 md:pt-20">
       <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
         {eyebrow ? (
-          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.25em] text-[--lime-dark]">
+          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--lime-dark)]">
             {eyebrow}
           </p>
         ) : null}

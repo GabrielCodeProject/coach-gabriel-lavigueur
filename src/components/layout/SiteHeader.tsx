@@ -41,11 +41,11 @@ export function SiteHeader() {
         </nav>
 
         {/* Actions */}
-        <div className="ml-4 flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2 md:ml-4">
           <ThemeToggle />
           <Link
             href={ROUTES.CONTACT}
-            className="hidden h-9 items-center rounded-[4px] bg-[--dark] px-4 text-[10px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 md:inline-flex"
+            className="hidden h-9 items-center rounded-[4px] bg-[var(--dark)] px-4 text-[10px] font-bold uppercase tracking-[0.12em] text-primary transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 md:inline-flex"
           >
             {BUSINESS.cta.nav}
           </Link>

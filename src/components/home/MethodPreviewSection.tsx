@@ -12,7 +12,7 @@ const STEPS = [
 
 export function MethodPreviewSection() {
   return (
-    <section className="bg-[--dark-mid] py-20 md:py-24">
+    <section className="bg-[var(--dark-mid)] py-20 md:py-24">
       <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
         <p className="reveal mb-3 text-[11px] font-bold uppercase tracking-[0.25em] text-primary">
           Ma méthode
@@ -27,7 +27,7 @@ export function MethodPreviewSection() {
             return (
               <li
                 key={step.title}
-                className="reveal flex flex-col gap-4 bg-[--dark-mid] p-7 transition-colors hover:bg-[#1e341e]"
+                className="reveal flex flex-col gap-4 bg-[var(--dark-mid)] p-7 transition-colors hover:bg-[#1e341e]"
               >
                 <span className="text-[44px] font-black leading-none tracking-[-0.04em] text-primary">
                   {num}

@@ -27,7 +27,7 @@ export function SiteFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/8 bg-[--dark] text-white">
+    <footer className="border-t border-white/8 bg-[var(--dark)] text-white">
       <div className="mx-auto w-full max-w-6xl px-4 py-12 md:px-6">
         <div className="grid gap-10 md:grid-cols-3">
           {/* Coordonnées */}

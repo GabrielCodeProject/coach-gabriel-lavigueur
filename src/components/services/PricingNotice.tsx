@@ -25,10 +25,10 @@ const PRICING_HIGHLIGHTS = [
 
 export function PricingNotice({ title, body }: PricingNoticeProps) {
   return (
-    <section className="bg-[--cream]">
+    <section className="bg-[var(--cream)]">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-20">
         <div className="flex max-w-2xl flex-col gap-3 border-l-[3px] border-primary pl-6">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-[--lime-dark]">
+          <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--lime-dark)]">
             À lire avant de prendre un plan
           </span>
           <h2 className="text-balance text-2xl font-black uppercase tracking-[-0.04em] md:text-3xl">
@@ -44,7 +44,7 @@ export function PricingNotice({ title, body }: PricingNoticeProps) {
             return (
               <div
                 key={item.label}
-                className="flex flex-col gap-3 border border-border bg-background p-6 transition-colors hover:bg-[--off-white]"
+                className="flex flex-col gap-3 border border-border bg-background p-6 transition-colors hover:bg-[var(--off-white)]"
               >
                 <Icon className="size-5 text-primary" aria-hidden="true" />
                 <p className="font-bold text-foreground">{item.label}</p>

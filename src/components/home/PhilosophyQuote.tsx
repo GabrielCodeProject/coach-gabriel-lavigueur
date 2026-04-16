@@ -4,7 +4,7 @@ export function PhilosophyQuote() {
   if (BUSINESS.testimonials.enabled) return null;
 
   return (
-    <section className="relative overflow-hidden bg-[--cream] py-20 md:py-24">
+    <section className="relative overflow-hidden bg-[var(--cream)] py-20 md:py-24">
       {/* Guillemet watermark */}
       <span
         aria-hidden="true"

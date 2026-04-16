@@ -16,13 +16,13 @@ function formatPrice(amount: number): string {
 
 export function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <article className="relative flex h-full flex-col overflow-hidden border border-border bg-background p-8 transition-colors hover:bg-[--off-white]">
+    <article className="relative flex h-full flex-col overflow-hidden border border-border bg-background p-8 transition-colors hover:bg-[var(--off-white)]">
       <span
         className="absolute inset-y-0 left-0 w-[3px] origin-bottom scale-y-0 bg-primary transition-transform duration-[250ms] group-hover:scale-y-100"
         aria-hidden="true"
       />
       {service.is_one_time ? (
-        <p className="mb-3 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-[--lime-dark]">
+        <p className="mb-3 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-[var(--lime-dark)]">
           <InfinityIcon className="size-3.5" aria-hidden="true" />
           Paiement unique à vie
         </p>

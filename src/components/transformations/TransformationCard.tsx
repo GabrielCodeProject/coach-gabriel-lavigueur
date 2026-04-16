@@ -19,7 +19,7 @@ export function TransformationCard({ transformation }: TransformationCardProps) 
       className="group"
       aria-label={`Voir la transformation de ${transformation.client_name} — ${transformation.duration_months} mois`}
     >
-      <Card className="h-full overflow-hidden border border-border bg-background transition-colors group-hover:bg-[--off-white]">
+      <Card className="h-full overflow-hidden border border-border bg-background transition-colors group-hover:bg-[var(--off-white)]">
         <div className="grid grid-cols-2">
           <picture>
             <source
