@@ -6,23 +6,21 @@ type PageHeroProps = {
 
 export function PageHero({ eyebrow, title, subtitle }: PageHeroProps) {
   return (
-    <section className="border-b border-border bg-background">
-      <div className="mx-auto w-full max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <div className="flex max-w-3xl flex-col gap-4">
-          {eyebrow ? (
-            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-              {eyebrow}
-            </span>
-          ) : null}
-          <h1 className="text-balance text-4xl font-semibold tracking-tight md:text-5xl">
-            {title}
-          </h1>
-          {subtitle ? (
-            <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              {subtitle}
-            </p>
-          ) : null}
-        </div>
+    <section className="border-b border-border bg-background pb-14 pt-16 md:pb-16 md:pt-20">
+      <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+        {eyebrow ? (
+          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.25em] text-[--lime-dark]">
+            {eyebrow}
+          </p>
+        ) : null}
+        <h1 className="text-[clamp(36px,5vw,64px)] font-black uppercase leading-[0.92] tracking-[-0.04em] text-foreground">
+          {title}
+        </h1>
+        {subtitle ? (
+          <p className="mt-5 max-w-2xl text-[17px] leading-[1.65] text-foreground/70">
+            {subtitle}
+          </p>
+        ) : null}
       </div>
     </section>
   );
